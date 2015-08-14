@@ -51,7 +51,7 @@ body {
 	<!-- Swiper -->
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide" style="background-color: #FF0000;">Slide 1</div>
+			<div class="swiper-slide" style="background-color: #FF0000;">Slide 1 <button id="button">fullscreen</button></div>
 			<div class="swiper-slide" style="background-color: #FFCC00;">Slide 1</div>
 			<div class="swiper-slide" style="background-color: #66FF33;">Slide 1</div>
 			<div class="swiper-slide" style="background-color: #FF9900;">Slide 1</div>
@@ -68,6 +68,7 @@ body {
 
 	<!-- Swiper JS -->
 	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/screenfull.min.js"></script>
 
 	<!-- Initialize Swiper -->
 	<script>
@@ -76,7 +77,13 @@ body {
         paginationClickable: true
     });
 
-    document.body.requestFullscreen();
+    document.getElementById('button').addEventListener('click', function () {
+        if (screenfull.enabled) {
+            screenfull.request();
+        } else {
+            // Ignore or do something else
+        }
+    });
     </script>
 </body>
 </html>
