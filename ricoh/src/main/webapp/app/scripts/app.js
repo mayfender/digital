@@ -10,6 +10,7 @@
 angular
   .module('sbAdminApp', [
     'oc.lazyLoad',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
