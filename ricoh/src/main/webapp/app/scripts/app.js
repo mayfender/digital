@@ -22,7 +22,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/dashboard/may');
 
     $stateProvider
       .state('dashboard', {
@@ -39,7 +39,7 @@ angular
                     'scripts/directives/sidebar/sidebar.js',
                     'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
                     ]
-                }),
+                })/*,
                 $ocLazyLoad.load(
                 {
                    name:'toggle-switch',
@@ -71,7 +71,7 @@ angular
                 {
                   name:'ngTouch',
                   files:['bower_components/angular-touch/angular-touch.js']
-                })
+                })*/
             }
         }
     })
@@ -94,6 +94,10 @@ angular
           }
         }
       })
+      .state('dashboard.may',{
+        templateUrl:'views/may.html',
+        url:'/may'
+    })
       .state('dashboard.form',{
         templateUrl:'views/form.html',
         url:'/form'
