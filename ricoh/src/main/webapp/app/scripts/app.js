@@ -94,9 +94,20 @@ angular
           }
         }
       })
-      .state('dashboard.may',{
+    .state('dashboard.may',{
         templateUrl:'views/may.html',
         url:'/may'
+    })
+    .state('dashboard.user',{
+        templateUrl:'views/user/main.html'
+    })
+    .state('dashboard.user.search',{
+    	templateUrl:'views/user/search.html',
+    	url:'/user/search'
+    })
+    .state('dashboard.user.add',{
+    	templateUrl:'views/user/add.html',
+    	url:'/user/add'
     })
       .state('dashboard.form',{
         templateUrl:'views/form.html',

@@ -83,7 +83,7 @@ background-color: #eee;
 }
 
 
-[ui-view].ng-enter,[ui-view].ng-leave{
+/* [ui-view].ng-enter,[ui-view].ng-leave{
 	position:relative;left:0;right:0;transition:all .5s ease-in-out
 }
 [ui-view].ng-enter{
@@ -100,4 +100,4 @@ background-color: #eee;
 }
 [ui-view].ng-leave-active{
 	opacity:0
-}
+} */
