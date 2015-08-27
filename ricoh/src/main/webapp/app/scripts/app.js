@@ -99,15 +99,24 @@ angular
         url:'/may'
     })
     .state('dashboard.user',{
-        templateUrl:'views/user/main.html'
+        templateUrl:'views/user/main.html',
+    	controller: function($scope){
+    		$scope.addBtn = true;
+    	}
     })
     .state('dashboard.user.search',{
     	templateUrl:'views/user/search.html',
-    	url:'/user/search'
+    	url:'/user/search',
+    	controller: function($scope) {
+    		$scope.$parent.addBtn = true;
+    	}
     })
     .state('dashboard.user.add',{
     	templateUrl:'views/user/add.html',
-    	url:'/user/add'
+    	url:'/user/add',
+    	controller: function($scope) {
+    		$scope.$parent.addBtn = false;
+    	}
     })
       .state('dashboard.form',{
         templateUrl:'views/form.html',

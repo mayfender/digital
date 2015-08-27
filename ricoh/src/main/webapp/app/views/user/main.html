@@ -10,7 +10,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <i class="fa fa-users fa-fw"></i> User Management
-                    <button type="button" class="btn btn-warning btn-circle btn-lg pull-right" ui-sref="dashboard.user.add">
+                    <button ng-show="addBtn" type="button" class="btn btn-warning btn-circle btn-lg pull-right" ui-sref="dashboard.user.add">
                     	<i class="fa fa-plus-square"></i>
                     </button>
                 </div>
@@ -18,38 +18,6 @@
                 
                 	<div ui-view></div>
                 	
-                	<!-- <div class="table-responsive">
-	                    <table class="table">
-	                        <thead>
-	                            <tr>
-	                                <th>#</th>
-	                                <th>First Name</th>
-	                                <th>Last Name</th>
-	                                <th>Username</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody>
-	                            <tr>
-	                                <td>1</td>
-	                                <td>Mark</td>
-	                                <td>Otto</td>
-	                                <td>@mdo</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2</td>
-	                                <td>Jacob</td>
-	                                <td>Thornton</td>
-	                                <td>@fat</td>
-	                            </tr>
-	                            <tr>
-	                                <td>3</td>
-	                                <td>Larry</td>
-	                                <td>the Bird</td>
-	                                <td>@twitter</td>
-	                            </tr>
-	                        </tbody>
-	                    </table>
-	                </div> -->
                 </div>
                 <div class="panel-footer"></div>
             </div>
