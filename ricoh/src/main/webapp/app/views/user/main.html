@@ -9,9 +9,9 @@
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <i class="fa fa-users fa-fw"></i> User Management
-                    <button ng-show="addBtn" type="button" class="btn btn-warning btn-circle btn-lg pull-right" ui-sref="dashboard.user.add">
-                    	<i class="fa fa-plus-square"></i>
+                    <i class="fa fa-users fa-fw"></i> {{headerTitle}}
+                    <button type="button" class="btn btn-warning btn-circle btn-lg pull-right" ui-sref="dashboard.user.add">
+                    	<i class="fa" ng-class="iconBtn"></i>
                     </button>
                 </div>
                 <div class="panel-body">

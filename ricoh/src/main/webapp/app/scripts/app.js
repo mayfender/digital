@@ -101,21 +101,25 @@ angular
     .state('dashboard.user',{
         templateUrl:'views/user/main.html',
     	controller: function($scope){
-    		$scope.addBtn = true;
+    		// Todo:
     	}
     })
     .state('dashboard.user.search',{
     	templateUrl:'views/user/search.html',
     	url:'/user/search',
     	controller: function($scope) {
-    		$scope.$parent.addBtn = true;
+    		$scope.$parent.iconBtn = 'fa-plus-square';
+    		$scope.$parent.btnAction = '#/dashboard/user/add';
+    		$scope.$parent.headerTitle = 'User Listing';
     	}
     })
     .state('dashboard.user.add',{
     	templateUrl:'views/user/add.html',
     	url:'/user/add',
     	controller: function($scope) {
-    		$scope.$parent.addBtn = false;
+    		$scope.$parent.iconBtn = 'fa-long-arrow-left';
+    		$scope.$parent.btnAction = '#/dashboard/user/search';
+    		$scope.$parent.headerTitle = 'User Adding';
     	}
     })
       .state('dashboard.form',{
