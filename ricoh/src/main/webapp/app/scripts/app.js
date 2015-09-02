@@ -100,8 +100,10 @@ angular
     })
     .state('dashboard.user',{
         templateUrl:'views/user/main.html',
-    	controller: function($scope){
-    		// Todo:
+    	controller: function($scope, $state){
+    		$scope.gotoSelected = function() {
+    			$state.go("dashboard.user." + $scope.url);
+    		}
     	}
     })
     .state('dashboard.user.search',{
@@ -109,7 +111,7 @@ angular
     	url:'/user/search',
     	controller: function($scope) {
     		$scope.$parent.iconBtn = 'fa-plus-square';
-    		$scope.$parent.btnAction = '#/dashboard/user/add';
+    		$scope.$parent.url = 'add';
     		$scope.$parent.headerTitle = 'User Listing';
     	}
     })
@@ -118,8 +120,18 @@ angular
     	url:'/user/add',
     	controller: function($scope) {
     		$scope.$parent.iconBtn = 'fa-long-arrow-left';
-    		$scope.$parent.btnAction = '#/dashboard/user/search';
+    		$scope.$parent.url = 'search';
     		$scope.$parent.headerTitle = 'User Adding';
+    		
+    		$scope.autoGenEvent = function() {
+    			if($scope.autoGen){
+    				$scope.username = 'gen' + Math.floor(Date.now() / 1000);
+    				$scope.password = 'password';    			
+    			}else{
+    				$scope.username = null;
+    				$scope.password = null;
+    			}    			
+    		}
     	}
     })
       .state('dashboard.form',{

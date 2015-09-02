@@ -1,29 +1,26 @@
 <div>
-	<!-- <button type="button"
-		class="btn btn-warning btn-circle btn-lg pull-right"
-		ui-sref="dashboard.user.search">
-		<i class="fa fa-long-arrow-left"></i>
-	</button> -->
-
 	<div class="col-lg-6">
 		<form role="form">
-			<div class="form-group">
-				<label>User Name</label> <input class="form-control">
+			<div class="form-inline">
+				<label>Auto Generated</label> <input type="checkbox" value="" ng-model="autoGen" ng-change="autoGenEvent()">
 			</div>
 			<div class="form-group">
-				<label>Password</label> <input class="form-control" type="password">
+				<label>Username</label> <input class="form-control" ng-model="username">
 			</div>
 			<div class="form-group">
-				<label>Password Again</label> <input class="form-control" type="password">
+				<label>Password</label> <input class="form-control" type="password" ng-model="password">
+				<p class="help-block" ng-show="autoGen">Generated Password is {{ password }}</p>
 			</div>
+			<div class="form-group" ng-show="!autoGen">
+				<label>Re-type Password</label> <input class="form-control" type="password">
+				</div>
 			<div class="form-group">
-				<label>Select Role</label> 
-				<select class="form-control">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
+				<label>Select Role</label> <select class="form-control">
+					<option>Please select role</option>
+					<option>Admin</option>
+					<option>Manager</option>
+					<option>Sale</option>
+					<option>Product</option>
 				</select>
 			</div>
 			<div style="text-align: center;">
@@ -32,5 +29,4 @@
 			</div>
 		</form>
 	</div>
-
 </div>
