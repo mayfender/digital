@@ -12,20 +12,21 @@
 				<p class="help-block" ng-show="autoGen">Generated Password is {{ password }}</p>
 			</div>
 			<div class="form-group" ng-show="!autoGen">
-				<label>Re-type Password</label> <input class="form-control" type="password">
+				<label>Re-type Password</label> <input class="form-control" type="password" ng-model="reTypePassword">
 				</div>
 			<div class="form-group">
-				<label>Select Role</label> <select class="form-control">
-					<option>Please select role</option>
-					<option>Admin</option>
-					<option>Manager</option>
-					<option>Sale</option>
-					<option>Product</option>
+				<label>Select Role</label> 
+				<select class="form-control" ng-model="role">
+					<option value="">Please select role</option>
+					<option value="1">Admin</option>
+					<option value="2">Manager</option>
+					<option value="3">Sale</option>
+					<option value="4">Product</option>
 				</select>
 			</div>
 			<div style="text-align: center;">
-				<button type="button" class="btn btn-outline btn-primary btn-lg">Clear</button>
-				<button type="button" class="btn btn-outline btn-primary btn-lg">Save</button>
+				<button type="button" class="btn btn-outline btn-primary btn-lg" ng-click="clear()">Clear</button>
+				<button type="button" class="btn btn-outline btn-primary btn-lg" ng-click="save()">Save</button>
 			</div>
 		</form>
 	</div>

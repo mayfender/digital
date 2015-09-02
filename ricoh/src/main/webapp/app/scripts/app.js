@@ -98,6 +98,8 @@ angular
         templateUrl:'views/may.html',
         url:'/may'
     })
+    
+    //------------------------------------: User :-------------------------------------------
     .state('dashboard.user',{
         templateUrl:'views/user/main.html',
     	controller: function($scope, $state){
@@ -118,22 +120,19 @@ angular
     .state('dashboard.user.add',{
     	templateUrl:'views/user/add.html',
     	url:'/user/add',
-    	controller: function($scope) {
-    		$scope.$parent.iconBtn = 'fa-long-arrow-left';
-    		$scope.$parent.url = 'search';
-    		$scope.$parent.headerTitle = 'User Adding';
-    		
-    		$scope.autoGenEvent = function() {
-    			if($scope.autoGen){
-    				$scope.username = 'gen' + Math.floor(Date.now() / 1000);
-    				$scope.password = 'password';    			
-    			}else{
-    				$scope.username = null;
-    				$scope.password = null;
-    			}    			
-    		}
+    	controller: 'AddUserCtrl',
+    	resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+              return $ocLazyLoad.load({
+            	  name:'sbAdminApp',
+                  files:['scripts/controllers/user/addUserCtrl.js']
+              });
+            }
     	}
     })
+    //------------------------------------: User :-------------------------------------------
+    
+    
       .state('dashboard.form',{
         templateUrl:'views/form.html',
         url:'/form'
