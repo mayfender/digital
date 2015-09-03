@@ -111,10 +111,16 @@ angular
     .state('dashboard.user.search',{
     	templateUrl:'views/user/search.html',
     	url:'/user/search',
-    	controller: function($scope) {
-    		$scope.$parent.iconBtn = 'fa-plus-square';
-    		$scope.$parent.url = 'add';
-    		$scope.$parent.headerTitle = 'User Listing';
+    	controller: 'SearchUserCtrl',
+    	resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+              return $ocLazyLoad.load({
+            	  name:'sbAdminApp',
+                  files:['scripts/controllers/user/searchUserCtrl.js',
+                         'styles/user.css'
+                         ]
+              });
+            }
     	}
     })
     .state('dashboard.user.add',{

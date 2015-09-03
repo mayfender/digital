@@ -1,31 +1,22 @@
 <div class="table-responsive">
-	<table class="table">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>#</th>
 				<th>Username</th>
 				<th>Role</th>
-				<th>Action</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Mark</td>
-				<td>Admin</td>
-				<td>-</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Jacob</td>
-				<td>Manager</td>
-				<td>-</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Larry</td>
-				<td>Product</td>
-				<td>-</td>
+			<tr ng-repeat="u in data.users track by $index">
+				<td>{{ $index + 1 }}</td>
+				<td>{{ u.userName }}</td>
+				<td>{{ u.role }}</td>
+				<td>
+					<i class="fa fa-times fa-lg user-action-icon" ng-click="deleteUser(u.id)"></i>&emsp;
+					<i class="fa fa-edit fa-lg user-action-icon" ng-click="editUser(u.id)"></i>
+				</td>
 			</tr>
 		</tbody>
 	</table>
