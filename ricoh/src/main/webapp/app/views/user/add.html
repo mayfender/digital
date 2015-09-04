@@ -8,20 +8,22 @@
 				<label>Username</label> <input class="form-control" ng-model="username">
 			</div>
 			<div class="form-group">
-				<label>Password</label> <input class="form-control" type="password" ng-model="password">
+				<label>Password</label> <input class="form-control" type="password" ng-model="password" ng-disabled="isEdit">
 				<p class="help-block" ng-show="autoGen">Generated Password is {{ password }}</p>
 			</div>
 			<div class="form-group" ng-show="!autoGen">
-				<label>Re-type Password</label> <input class="form-control" type="password" ng-model="reTypePassword">
-				</div>
+				<label>Re-type Password</label> <input class="form-control" type="password" ng-model="reTypePassword" ng-disabled="isEdit">
+			</div>
 			<div class="form-group">
 				<label>Select Role</label> 
 				<select class="form-control" ng-model="role">
 					<option value="">Please select role</option>
-					<option value="1">Admin</option>
-					<option value="2">Manager</option>
-					<option value="3">Sale</option>
-					<option value="4">Product</option>
+					<option value="11">Admin</option>
+					<option value="22">Manager</option>
+					<option value="33">Sale</option>
+					<option value="44">Product</option>
+					<option value="55">Product2</option>
+					<option value="66">Product3</option>
 				</select>
 			</div>
 			<div style="text-align: center;">

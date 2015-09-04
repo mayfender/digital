@@ -1,8 +1,16 @@
-angular.module('sbAdminApp').controller('AddUserCtrl', function($scope) {
+angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams) {
 	console.log('Start AddUserCtrl');
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
 	$scope.$parent.headerTitle = 'User Adding';
+	
+	//-- Initial Edit page
+	if($stateParams.user) {
+		console.log('Init edit page');
+		$scope.username = $stateParams.user.userName;
+		$scope.role = $stateParams.user.roleId;
+		$scope.isEdit = true;
+	}
 	
 	$scope.clear = function() {
 		setNull();    			

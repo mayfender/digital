@@ -126,6 +126,7 @@ angular
     .state('dashboard.user.add',{
     	templateUrl:'views/user/add.html',
     	url:'/user/add',
+    	params: {'user': null},
     	controller: 'AddUserCtrl',
     	resolve: {
             loadMyFiles:function($ocLazyLoad) {
