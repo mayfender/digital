@@ -98,7 +98,6 @@ angular
         templateUrl:'views/may.html',
         url:'/may'
     })
-    
     //------------------------------------: User :-------------------------------------------
     .state('dashboard.user',{
         templateUrl:'views/user/main.html',
@@ -137,9 +136,29 @@ angular
             }
     	}
     })
-    //------------------------------------: User :-------------------------------------------
-    
-    
+    //------------------------------------: Profile :-------------------------------------------
+    .state('dashboard.profile',{
+        templateUrl:'views/profile/main.html',
+        url:'/profile',
+    	controller: function($scope){
+    		console.log('Start profile');
+    		
+    		$scope.data = {};
+    		$scope.data.role = 'Admin';
+    		$scope.data.username = 'mana';
+    		$scope.data.password;
+    		$scope.data.reTypePassword;
+    	},
+    	resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+              return $ocLazyLoad.load({
+            	  name:'sbAdminApp',
+                  files:['styles/profile.css']
+              });
+            }
+    	}
+    })
+    //------------------------------------: Form :-------------------------------------------
       .state('dashboard.form',{
         templateUrl:'views/form.html',
         url:'/form'
