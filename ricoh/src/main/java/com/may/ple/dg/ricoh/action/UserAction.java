@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.restserv;
+package com.may.ple.dg.ricoh.action;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

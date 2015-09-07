@@ -6,10 +6,10 @@ import org.apache.log4j.Logger;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
-import com.may.ple.dg.ricoh.restserv.UserAction;
+import com.may.ple.dg.ricoh.action.UserAction;
 
 @Component
-@ApplicationPath(value="/restServ")
+@ApplicationPath(value="/restAct")
 public class JerseyConfig extends ResourceConfig {
 	private static final Logger LOG = Logger.getLogger(JerseyConfig.class.getName());
 	
