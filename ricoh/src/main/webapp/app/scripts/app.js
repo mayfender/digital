@@ -169,7 +169,8 @@ angular
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
-        url:'/login'
+        url:'/login',
+        controller: 'LoginCtrl'
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
