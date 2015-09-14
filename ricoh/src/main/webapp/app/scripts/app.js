@@ -17,6 +17,8 @@ angular
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
+	//$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+	  
     $ocLazyLoadProvider.config({
       debug:false,
       events:true,
