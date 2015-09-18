@@ -1,5 +1,16 @@
 angular.module('sbAdminApp').controller('LoginCtrl', function($scope, $http, $stateParams) {
 	
+	$scope.logout = function() {
+		$http.post('/ricoh/logout', {}).success(function() {
+			console.log("Logout success");
+			$scope.authenticated = false;
+//		    $location.path("/");
+		}).error(function(data) {
+			console.log("Logout error");
+			$scope.authenticated = false;
+		});
+	}
+	
 	$scope.login = function() {
 		authenticate($scope.credentials, function() {
 	        if ($scope.authenticated) {
@@ -16,23 +27,23 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($scope, $http, $st
 	
 	
 	var authenticate = function(credentials, callback) {
-
+		console.log(credentials.username + ":" + credentials.password);
 	    var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password)} : {};
 	    console.log(headers);
 
-	    $http.get('/ricoh/restAct/user/checkUser', {headers : headers}).success(function(data) {
+	    $http.get('/ricoh/user', {headers : headers}).success(function(data) {
 	    	console.log(data);
 	      if (data.name) {
-	        //$rootScope.authenticated = true;
+	        $scope.authenticated = true;
 	    	  console.log('2');
 	      } else {
-	        //$rootScope.authenticated = false;
+	    	  $scope.authenticated = false;
 	    	  console.log('3');
 	      }
 	      callback && callback();
 	    }).error(function() {
 	    	console.log('1');
-	      //$rootScope.authenticated = false;
+	      $scope.authenticated = false;
 	      callback && callback();
 	    });
 

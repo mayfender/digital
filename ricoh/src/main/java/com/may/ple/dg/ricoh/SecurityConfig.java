@@ -26,20 +26,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.authorizeRequests()
-				.antMatchers("/app/js/**", "/app/lib/**", "/restAct/user/checkUser",
-							 "/app/scripts/**", "/app/styles/**", 
-							 "/app/views/pages/login.html", "/app/index.html").permitAll()
-				.anyRequest().authenticated()
-				.and()
-			.formLogin()
-				.loginPage("/app/index.html#/login")
-				.defaultSuccessUrl("/app/index.html", true)
-				.failureUrl("/index.html?error=1")
-				.permitAll()
-				.and()
-			.logout().logoutUrl("/");
+		http.httpBasic()
+		.and()
+		.csrf().disable()
+		.authorizeRequests()
+			.antMatchers("/app/js/**", "/app/lib/**", "/user", "/",
+					     "/app/scripts/**", "/app/styles/**", 
+						 "/app/views/pages/login.html", "/app/index.html").permitAll()
+			.anyRequest().authenticated()
+		.and()
+		.formLogin()
+			.loginPage("/app/test.html")
+//			.defaultSuccessUrl("/app/index.html", true)
+//			.failureUrl("/index.html?error=1")
+			.permitAll()
+		.and()
+		.logout().logoutUrl("/logout");
 	}
 
 }
