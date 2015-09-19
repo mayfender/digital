@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('SearchUserCtrl', function($scope, $state) {
+angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $scope, $state) {
 	console.log('Start SearchUserCtrl');
 	$scope.$parent.iconBtn = 'fa-plus-square';
 	$scope.$parent.url = 'add';
@@ -21,6 +21,5 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($scope, $stat
 		console.log('editUser : ' + user.id);
 		$state.go('dashboard.user.add', {user: user});
 	}
-	
 	
 });

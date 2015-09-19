@@ -142,12 +142,12 @@ angular
     .state('dashboard.profile',{
         templateUrl:'views/profile/main.html',
         url:'/profile',
-    	controller: function($scope){
+    	controller: function($rootScope, $scope){
     		console.log('Start profile');
     		
     		$scope.data = {};
-    		$scope.data.role = 'Admin';
-    		$scope.data.username = 'mana';
+    		$scope.data.role = $rootScope.principal.authorities[0].authority;
+    		$scope.data.username = $rootScope.principal.username;
     		$scope.data.password;
     		$scope.data.reTypePassword;
     	},
@@ -171,6 +171,7 @@ angular
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
+        params: {'action': null},
         url:'/login',
         controller: 'LoginCtrl'
     })

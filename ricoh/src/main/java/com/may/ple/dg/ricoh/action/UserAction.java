@@ -1,7 +1,5 @@
 package com.may.ple.dg.ricoh.action;
 
-import java.security.Principal;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,13 +14,6 @@ public class UserAction {
 	private static final Logger LOG = Logger.getLogger(UserAction.class.getName());
 	
 	public UserAction() {}
-	
-	@GET
-	@Path("/checkUser")
-	public Principal user(Principal user) {
-		LOG.debug("User : " + user);
-		return user;
-	}
 	
 	@GET
 	@Path("/getUser")

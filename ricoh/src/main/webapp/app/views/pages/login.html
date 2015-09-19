@@ -20,12 +20,14 @@
                                     <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                 </label>
                             </div> -->
-                            <!-- Change this to a button or input when using this as a form -->
-                            <!-- <a ui-sref="dashboard.home" class="btn btn-lg btn-success btn-block">Login</a> -->
                             <button class="btn btn-lg btn-success btn-block">Login</button>
-                            <button class="btn btn-lg btn-success btn-block" type="button" ng-click="logout()">Logout</button>
                         </fieldset>
                     </form>
+                </div>
+                <div class="panel-footer">
+	                <div class="alert alert-danger" style="text-align: center;" ng-show="error">
+	                    Invalid!
+	                </div>                
                 </div>
             </div>
         </div>
