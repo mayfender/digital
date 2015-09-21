@@ -38,11 +38,11 @@ public class UserAction {
 		try {			
 			List<User> users = userRepository.findAll(new Sort(Direction.ASC, "userName"));
 			criterial.setUsers(users);
-			LOG.debug(criterial);
 		} catch (Exception e) {
 			criterial.setStatusCode(100);
 		}
 		
+		LOG.debug(criterial);
 		LOG.debug("End");
 		return criterial;
 	}

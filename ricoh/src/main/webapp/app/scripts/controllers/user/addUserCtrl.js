@@ -8,7 +8,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 	if($stateParams.user) {
 		console.log('Init edit page');
 		$scope.username = $stateParams.user.userName;
-		$scope.role = $stateParams.user.roleId;
+		$scope.role = $stateParams.user.roles[0].id;
 		$scope.isEdit = true;
 	}
 	

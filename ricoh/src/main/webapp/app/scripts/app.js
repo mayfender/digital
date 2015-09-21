@@ -122,9 +122,15 @@ angular
                          ]
               });
             },
-            loadUsers:function($http) {
-            	return $http.get('/ricoh/restAct/user/findUserAll').success(function(data) {
-            		console.log(data);
+            loadUsers:function($rootScope, $http, $state) {
+            	return $http.get('/ricoh/restAct/user/findUserAll').then(function(data){
+            		if(data.data.statusCode != 0) {
+            			$rootScope.error = true;
+            			$rootScope.msg = "Server Error!";
+            			$state.go($state.current, {}, {reload: false});
+            		}
+            		
+            		return data.data;
             	});
             }
     	}

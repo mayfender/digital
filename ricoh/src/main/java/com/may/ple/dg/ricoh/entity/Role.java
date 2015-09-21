@@ -19,7 +19,8 @@ public class Role implements Serializable {
 	@Column(name="username", nullable=false)
 	private String userName;
 	@Column(nullable=false)
-	private String roleName;
+	private String authority;
+	private String name;
 
 	protected Role() {}
 	
@@ -36,20 +37,28 @@ public class Role implements Serializable {
 		this.id = id;
 	}
 
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

@@ -1,15 +1,12 @@
 angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $stateParams) {
 	
-	$scope.login = function() {
-		$scope.error = false;
-		
+	$scope.login = function() {		
 		authenticate($scope.credentials, function() {
 	        if ($scope.authenticated) {
-	        	console.log("Login Sucess");
 	        	$state.go("dashboard.user.search");
 	        } else {
-	        	console.log("Login Error");
-	        	$scope.error = true;
+	        	$rootScope.error = true;
+	        	$rootScope.msg = "Invalid!";
 	        }
 	   });
 	}
@@ -18,8 +15,6 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	    var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password), 'X-Requested-With' : 'XMLHttpRequest'} : {};
 
 	    $http.get('/ricoh/user', {headers : headers}).success(function(data) {
-		    console.log(data);
-		    
 		    if (data.name) {
 		    	$rootScope.principal = data.principal;
 		        $scope.authenticated = true;
