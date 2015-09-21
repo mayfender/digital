@@ -121,6 +121,11 @@ angular
                          'styles/user.css'
                          ]
               });
+            },
+            loadUsers:function($http) {
+            	return $http.get('/ricoh/restAct/user/findUserAll').success(function(data) {
+            		console.log(data);
+            	});
             }
     	}
     })

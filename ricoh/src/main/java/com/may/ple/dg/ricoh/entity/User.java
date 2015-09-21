@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,12 +37,13 @@ public class User implements Serializable {
 	@Column(name="username", nullable=false)
 	private String userName;
 	@Column(name="password", nullable=false)
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="username", referencedColumnName="username")
+	private List<Role> roles;
 	private String password;
 	private Timestamp createdDateTime;
 	private Timestamp updatedDateTime;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Role.class)
-	private List<Role> roles;
-	private int enabled;
+	private int enabled;	
 	
 	protected User() {}
 	

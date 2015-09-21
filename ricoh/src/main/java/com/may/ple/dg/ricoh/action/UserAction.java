@@ -11,9 +11,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 
-import com.may.ple.dg.ricoh.criteria.UserSearchCriterial;
+import com.may.ple.dg.ricoh.criteria.UserSearchCriteria;
 import com.may.ple.dg.ricoh.entity.User;
 import com.may.ple.dg.ricoh.repository.UserRepository;
 
@@ -29,16 +31,17 @@ public class UserAction {
 	@GET
 	@Path("/findUserAll")
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserSearchCriterial findUserAll() {
+	public UserSearchCriteria findUserAll() {
 		LOG.debug("Start");
-		UserSearchCriterial criterial = new UserSearchCriterial();
-		List<User> users = userRepository.findByStatus(1);
-		for (User user : users) {
-			user.setRoles(null);
-		}
-		criterial.setUsers(users);
+		UserSearchCriteria criterial = new UserSearchCriteria();
 		
-		LOG.debug(criterial);
+		try {			
+			List<User> users = userRepository.findAll(new Sort(Direction.ASC, "userName"));
+			criterial.setUsers(users);
+			LOG.debug(criterial);
+		} catch (Exception e) {
+			criterial.setStatusCode(100);
+		}
 		
 		LOG.debug("End");
 		return criterial;

@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -18,9 +16,8 @@ public class Role implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ManyToOne
-	@JoinColumn(name="username", referencedColumnName="username")
-	private User user;
+	@Column(name="username", nullable=false)
+	private String userName;
 	@Column(nullable=false)
 	private String roleName;
 
@@ -47,12 +44,12 @@ public class Role implements Serializable {
 		this.roleName = roleName;
 	}
 
-	public User getUser() {
-		return user;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 }
