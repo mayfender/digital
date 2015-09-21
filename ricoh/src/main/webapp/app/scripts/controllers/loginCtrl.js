@@ -4,6 +4,8 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		authenticate($scope.credentials, function() {
 	        if ($scope.authenticated) {
 	        	$state.go("dashboard.user.search");
+	        	$rootScope.error = false;
+	        	$rootScope.msg = null;
 	        } else {
 	        	$rootScope.error = true;
 	        	$rootScope.msg = "Invalid!";

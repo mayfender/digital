@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.may.ple.dg.ricoh.criteria.UserSearchCriteria;
@@ -25,6 +26,8 @@ public class UserAction {
 	private static final Logger LOG = Logger.getLogger(UserAction.class.getName());
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired	
+	private PasswordEncoder passwordEncoder;
 	
 	public UserAction() {}
 	
@@ -42,7 +45,6 @@ public class UserAction {
 			criterial.setStatusCode(100);
 		}
 		
-		LOG.debug(criterial);
 		LOG.debug("End");
 		return criterial;
 	}
@@ -59,6 +61,9 @@ public class UserAction {
 	@Path("/saveUser")
 	public String saveUser(String userId) {
 		LOG.debug("Start");
+		
+		passwordEncoder.encode("");
+		
 		LOG.debug("End");
 		return "";
 	}

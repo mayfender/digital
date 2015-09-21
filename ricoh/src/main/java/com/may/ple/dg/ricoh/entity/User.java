@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /* --------------: Use for native query
  * @NamedNativeQueries({ 
 	@NamedNativeQuery (name = "User.findByStatus", 
@@ -36,10 +39,10 @@ public class User implements Serializable {
 	private Long id;
 	@Column(name="username", nullable=false)
 	private String userName;
-	@Column(name="password", nullable=false)
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="username", referencedColumnName="username")
 	private List<Role> roles;
+	@Column(name="password", nullable=false)
 	private String password;
 	private Timestamp createdDateTime;
 	private Timestamp updatedDateTime;
@@ -68,10 +71,12 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}
