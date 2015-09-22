@@ -5,30 +5,36 @@
 				<label>Auto Generated</label> <input type="checkbox" value="" ng-model="autoGen" ng-change="autoGenEvent()">
 			</div>
 			<div class="form-group">
-				<label>Username</label> <input class="form-control" ng-model="username">
+				<label>Username</label> <input class="form-control" ng-model="user.userName">
 			</div>
 			<div class="form-group">
-				<label>Password</label> <input class="form-control" type="password" ng-model="password" ng-disabled="isEdit">
-				<p class="help-block" ng-show="autoGen">Generated Password is {{ password }}</p>
+				<label>Password</label> <input class="form-control" type="password" ng-model="user.password" ng-disabled="isEdit">
+				<p class="help-block" ng-show="autoGen">Generated Password is {{ user.password }}</p>
 			</div>
 			<div class="form-group" ng-show="!autoGen">
-				<label>Re-type Password</label> <input class="form-control" type="password" ng-model="reTypePassword" ng-disabled="isEdit">
+				<label>Re-type Password</label> <input class="form-control" type="password" ng-model="user.reTypePassword" ng-disabled="isEdit">
 			</div>
 			<div class="form-group">
 				<label>Select Role</label> 
-				<select class="form-control" ng-model="role">
+				<select class="form-control" ng-model="user.roles[0].id">
 					<option value="">Please select role</option>
 					<option value="1">User</option>
 					<option value="2">Admin</option>
-					<option value="33">Sale</option>
-					<option value="44">Product</option>
-					<option value="55">Product2</option>
-					<option value="66">Product3</option>
+					<option value="3">Sale</option>
 				</select>
 			</div>
+			<div class="form-group">
+                 <label>Status &nbsp;&nbsp;</label>
+                 <label class="radio-inline">
+                     <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" ng-checked="user.enabled">enabled
+                 </label>
+                 <label class="radio-inline">
+                     <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2" ng-checked="!user.enabled">disabled
+                 </label>
+             </div>
 			<div style="text-align: center;">
 				<button type="button" class="btn btn-outline btn-primary btn-lg" ng-click="clear()">Clear</button>
-				<button type="button" class="btn btn-outline btn-primary btn-lg" ng-click="save()">Save</button>
+				<button type="button" class="btn btn-outline btn-primary btn-lg" ng-click="isEdit ? update() : save()">{{ isEdit ? 'Update' : 'Save' }}</button>
 			</div>
 		</form>
 	</div>

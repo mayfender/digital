@@ -1,40 +1,74 @@
-angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams) {
+angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http) {
 	console.log('Start AddUserCtrl');
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
 	$scope.$parent.headerTitle = 'User Adding';
 	
-	//-- Initial Edit page
-	if($stateParams.user) {
+	if($stateParams.user) { //-- Initial edit module
 		console.log('Init edit page');
-		$scope.username = $stateParams.user.userName;
-		$scope.role = $stateParams.user.roles[0].id;
+		$scope.user = $stateParams.user;
 		$scope.isEdit = true;
+	} else {                // Initial for create module
+		$scope.user = {};
+		$scope.user.roles = [{}];
+		$scope.user.enabled = 1;
 	}
 	
 	$scope.clear = function() {
-		setNull();    			
+		setNull();
+	}
+	
+	$scope.update = function() {
+		$http.post('/ricoh/restAct/user/updateUser', {
+			id: $scope.user.id,
+			userName: $scope.user.userName,
+			roleId: $scope.user.roles[0].id,
+			status: $scope.user.enabled
+		}).success(function(data) {
+			if(data.statusCode != 0) {
+				// Manage Error
+			}
+			console.log("Save success");
+		}).error(function(data) {
+			// Manage Error
+			
+			console.log("Save error");
+		});
 	}
 	
 	$scope.save = function() {
-		
+		$http.post('/ricoh/restAct/user/saveUser', {
+			userName: $scope.user.userName,
+			password: btoa($scope.user.password),
+			roleId: $scope.user.roles[0].id,
+			status: $scope.user.enabled
+		}).success(function(data) {
+			if(data.statusCode != 0) {
+				// Manage Error
+			}
+			console.log("Save success");
+		}).error(function(data) {
+			// Manage Error
+			
+			console.log("Save error");
+		});
 	}
 	
 	$scope.autoGenEvent = function() {
 		if($scope.autoGen){
-			$scope.username = 'gen_' + Math.floor(Date.now() / 1000);
-			$scope.password = '1234';    	
-			$scope.role = "";
+			$scope.user.userName = 'gen_' + Math.floor(Date.now() / 1000);
+			$scope.user.password = '1234';    	
+			$scope.user.roles[0].id = "";
 		}else{
 			setNull();
 		}    			
 	}
 	
 	function setNull() {
-		$scope.reTypePassword = null;
-		$scope.username = null;
-		$scope.password = null;
+		$scope.user.reTypePassword = null;
+		$scope.user.userName = null;
+		$scope.user.password = null;
 		$scope.autoGen = false;
-		$scope.role = "";
+		$scope.user.roles[0].id = "";
 	} 
 });

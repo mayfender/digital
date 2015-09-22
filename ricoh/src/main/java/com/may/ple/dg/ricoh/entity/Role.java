@@ -24,6 +24,12 @@ public class Role implements Serializable {
 
 	protected Role() {}
 	
+	public Role(String userName, String authority, String name) {
+		this.userName = userName;
+		this.authority = authority;
+		this.name = name;
+	}
+	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);

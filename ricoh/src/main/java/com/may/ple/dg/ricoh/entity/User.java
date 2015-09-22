@@ -1,9 +1,10 @@
 package com.may.ple.dg.ricoh.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -39,16 +42,27 @@ public class User implements Serializable {
 	private Long id;
 	@Column(name="username", nullable=false)
 	private String userName;
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="username", referencedColumnName="username")
 	private List<Role> roles;
 	@Column(name="password", nullable=false)
 	private String password;
-	private Timestamp createdDateTime;
-	private Timestamp updatedDateTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDateTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedDateTime;
 	private int enabled;	
 	
 	protected User() {}
+	
+	public User(String userName, String password, Date createdDateTime, Date updatedDateTime, int enabled, List<Role> roles) {
+		this.userName = userName;
+		this.password = password;
+		this.createdDateTime = createdDateTime;
+		this.updatedDateTime = updatedDateTime;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
 	
 	@Override
 	public String toString() {
@@ -81,22 +95,6 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Timestamp getCreatedDateTime() {
-		return createdDateTime;
-	}
-
-	public void setCreatedDateTime(Timestamp createdDateTime) {
-		this.createdDateTime = createdDateTime;
-	}
-
-	public Timestamp getUpdatedDateTime() {
-		return updatedDateTime;
-	}
-
-	public void setUpdatedDateTime(Timestamp updatedDateTime) {
-		this.updatedDateTime = updatedDateTime;
-	}
-
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -111,6 +109,22 @@ public class User implements Serializable {
 
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
+	}
+
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
+
+	public Date getUpdatedDateTime() {
+		return updatedDateTime;
+	}
+
+	public void setUpdatedDateTime(Date updatedDateTime) {
+		this.updatedDateTime = updatedDateTime;
 	}
 	
 }

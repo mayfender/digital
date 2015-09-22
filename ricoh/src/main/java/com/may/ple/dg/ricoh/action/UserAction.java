@@ -11,45 +11,40 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.may.ple.dg.ricoh.criteria.UserSearchCriteria;
+import com.may.ple.dg.ricoh.criteria.CommonCriteriaResp;
+import com.may.ple.dg.ricoh.criteria.PersistUserCriteriaReq;
+import com.may.ple.dg.ricoh.criteria.UserSearchCriteriaResp;
 import com.may.ple.dg.ricoh.entity.User;
-import com.may.ple.dg.ricoh.repository.UserRepository;
+import com.may.ple.dg.ricoh.service.UserService;
 
 @Component
 @Path("user")
 public class UserAction {
 	private static final Logger LOG = Logger.getLogger(UserAction.class.getName());
 	@Autowired
-	private UserRepository userRepository;
-	@Autowired	
-	private PasswordEncoder passwordEncoder;
+	private UserService service;
 	
 	public UserAction() {}
 	
 	@GET
 	@Path("/findUserAll")
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserSearchCriteria findUserAll() {
+	public UserSearchCriteriaResp findUserAll() {
 		LOG.debug("Start");
-		UserSearchCriteria criterial = new UserSearchCriteria();
+		UserSearchCriteriaResp resp = new UserSearchCriteriaResp();
 		
-		try {			
-			List<User> users = userRepository.findAll(new Sort(Direction.ASC, "userName"));
-			criterial.setUsers(users);
-			
-			LOG.debug(passwordEncoder.encode("123"));
-			
+		try {
+			List<User> users = service.findAllUser();
+			resp.setUsers(users);
 		} catch (Exception e) {
-			criterial.setStatusCode(100);
+			resp.setStatusCode(100);
+			LOG.error(e.toString());
 		}
 		
 		LOG.debug("End");
-		return criterial;
+		return resp;
 	}
 	
 	@GET
@@ -62,21 +57,38 @@ public class UserAction {
 	
 	@POST
 	@Path("/saveUser")
-	public String saveUser(String userId) {
+	public CommonCriteriaResp saveUser(PersistUserCriteriaReq req) {
 		LOG.debug("Start");
+		CommonCriteriaResp resp = new CommonCriteriaResp() {};
 		
-		passwordEncoder.encode("");
+		try {
+			LOG.debug(req);
+			service.saveUser(req);
+		} catch (Exception e) {
+			resp.setStatusCode(100);
+			LOG.error(e.toString());
+		}
 		
 		LOG.debug("End");
-		return "";
+		return resp;
 	}
 	
 	@POST
 	@Path("/updateUser")
-	public String updateUser(String userId) {
+	public CommonCriteriaResp updateUser(PersistUserCriteriaReq req) {
 		LOG.debug("Start");
+		CommonCriteriaResp resp = new CommonCriteriaResp() {};
+		
+		try {
+			LOG.debug(req);
+			service.updateUser(req);
+		} catch (Exception e) {
+			resp.setStatusCode(100);
+			LOG.error(e.toString());
+		}
+		
 		LOG.debug("End");
-		return "";
+		return resp;
 	}
 
 }

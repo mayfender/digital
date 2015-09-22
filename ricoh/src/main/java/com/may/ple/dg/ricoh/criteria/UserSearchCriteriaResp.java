@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.may.ple.dg.ricoh.entity.User;
 
-public class UserSearchCriteria extends CommonCriteria {
+public class UserSearchCriteriaResp extends CommonCriteriaResp {
 	private List<User> users;
 	
 	@Override
