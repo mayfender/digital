@@ -41,6 +41,9 @@ public class UserAction {
 		try {			
 			List<User> users = userRepository.findAll(new Sort(Direction.ASC, "userName"));
 			criterial.setUsers(users);
+			
+			LOG.debug(passwordEncoder.encode("123"));
+			
 		} catch (Exception e) {
 			criterial.setStatusCode(100);
 		}

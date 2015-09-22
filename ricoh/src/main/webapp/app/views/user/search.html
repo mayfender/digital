@@ -14,7 +14,10 @@
 				<td>{{ $index + 1 }}</td>
 				<td>{{ u.userName }}</td>
 				<td>{{ u.roles[0].name }}</td>
-				<td>{{ u.enabled == 1 ? 'Enabled' : 'Disabled' }}</td>
+				<td>
+					<i class="fa fa-check-circle fa-lg user-status-enabled-icon" ng-show="u.enabled"></i>
+					<i class="fa  fa-minus-circle fa-lg user-status-disabled-icon" ng-hide="u.enabled"></i>
+				</td>
 				<td>
 					<i class="fa fa-times fa-lg user-action-icon" ng-click="deleteUser(u)"></i>&emsp;
 					<i class="fa fa-edit fa-lg user-action-icon" ng-click="editUser(u)"></i>
