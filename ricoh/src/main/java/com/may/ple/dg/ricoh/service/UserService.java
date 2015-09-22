@@ -38,7 +38,7 @@ public class UserService {
 	public void saveUser(PersistUserCriteriaReq req) throws Exception {
 		try {
 			String password = passwordEncoder.encode(new String(Base64.decode(req.getPassword().getBytes())));
-			List<Role> roles = getRole(req.getUserName(), req.getRoleId());
+			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
 			Date currentDate = new Date();
 			
 			User user = new User(req.getUserName(), password, currentDate, currentDate, req.getStatus(), roles);
@@ -51,12 +51,18 @@ public class UserService {
 	
 	public void updateUser(PersistUserCriteriaReq req) throws Exception {
 		try {
-			List<Role> roles = getRole(req.getUserName(), req.getRoleId());
+			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
+			Role r = roles.get(0);
+			
 			User user = userRepository.findOne(req.getId());
 			user.setUserName(req.getUserName());
-			user.setRoles(roles);
 			user.setEnabled(req.getStatus());
 			user.setUpdatedDateTime(new Date());
+			
+			Role role = user.getRoles().get(0);
+			role.setUserName(req.getUserName());
+			role.setAuthority(r.getAuthority());
+			role.setName(r.getName());
 			
 			userRepository.save(user);
 		} catch (Exception e) {
@@ -65,11 +71,11 @@ public class UserService {
 		}
 	}
 	
-	private List<Role> getRole(String userName, int roleId) throws Exception {
-		RolesConstant roleConstant = RolesConstant.findById(roleId);
+	private List<Role> getRole(String userName, String authority) throws Exception {
+		RolesConstant roleConstant = RolesConstant.valueOf(authority);
 		
 		if(roleConstant == null)
-			throw new Exception("Not found Role from roleId : " + roleId);
+			throw new Exception("Not found Role from authority : " + authority);
 		
 		List<Role> roles = new ArrayList<Role>();
 		Role role = new Role(userName, roleConstant.toString(), roleConstant.getName());

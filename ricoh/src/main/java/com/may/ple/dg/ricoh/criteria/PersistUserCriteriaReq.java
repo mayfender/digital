@@ -7,7 +7,7 @@ public class PersistUserCriteriaReq {
 	private long id;
 	private String userName;
 	private String password;
-	private int roleId;
+	private String authority;
 	private int status;
 	
 	@Override
@@ -27,12 +27,6 @@ public class PersistUserCriteriaReq {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
 	public int getStatus() {
 		return status;
 	}
@@ -46,6 +40,14 @@ public class PersistUserCriteriaReq {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 	
 }

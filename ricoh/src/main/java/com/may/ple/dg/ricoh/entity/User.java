@@ -42,7 +42,7 @@ public class User implements Serializable {
 	private Long id;
 	@Column(name="username", nullable=false)
 	private String userName;
-	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinColumn(name="username", referencedColumnName="username")
 	private List<Role> roles;
 	@Column(name="password", nullable=false)

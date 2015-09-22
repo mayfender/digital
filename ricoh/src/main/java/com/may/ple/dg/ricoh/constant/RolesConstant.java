@@ -3,7 +3,7 @@ package com.may.ple.dg.ricoh.constant;
 public enum RolesConstant {
 	ROLE_USER(1, "User"), 
 	ROLE_ADMIN(2, "Admin"),
-	ROLE_Sale(3, "Sale");
+	ROLE_SALE(3, "Sale");
 	
 	private int id;
 	private String name;

@@ -22,7 +22,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		$http.post('/ricoh/restAct/user/updateUser', {
 			id: $scope.user.id,
 			userName: $scope.user.userName,
-			roleId: $scope.user.roles[0].id,
+			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).success(function(data) {
 			if(data.statusCode != 0) {
@@ -40,7 +40,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		$http.post('/ricoh/restAct/user/saveUser', {
 			userName: $scope.user.userName,
 			password: btoa($scope.user.password),
-			roleId: $scope.user.roles[0].id,
+			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).success(function(data) {
 			if(data.statusCode != 0) {
@@ -58,7 +58,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		if($scope.autoGen){
 			$scope.user.userName = 'gen_' + Math.floor(Date.now() / 1000);
 			$scope.user.password = '1234';    	
-			$scope.user.roles[0].id = "";
+			$scope.user.roles[0].authority = "";
 		}else{
 			setNull();
 		}    			
@@ -69,6 +69,6 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		$scope.user.userName = null;
 		$scope.user.password = null;
 		$scope.autoGen = false;
-		$scope.user.roles[0].id = "";
+		$scope.user.roles[0].authority = "";
 	} 
 });
