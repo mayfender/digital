@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 
 import com.may.ple.dg.ricoh.criteria.CommonCriteriaResp;
 import com.may.ple.dg.ricoh.criteria.PersistUserCriteriaReq;
+import com.may.ple.dg.ricoh.criteria.ProfileUpdateCriteriaReq;
 import com.may.ple.dg.ricoh.criteria.UserSearchCriteriaResp;
 import com.may.ple.dg.ricoh.entity.User;
+import com.may.ple.dg.ricoh.exception.CustomerException;
 import com.may.ple.dg.ricoh.service.UserService;
 
 @Component
@@ -48,11 +50,22 @@ public class UserAction {
 	}
 	
 	@GET
-	@Path("/findUser")
-	public String findUser(@QueryParam("userId")String userId) {
+	@Path("/deleteUser")
+	public UserSearchCriteriaResp deleteUser(@QueryParam("userId")Long userId) {
 		LOG.debug("Start");
+		UserSearchCriteriaResp resp;
+		
+		try {
+			LOG.debug("userId : " + userId);
+			service.deleteUser(userId);
+			resp = findUserAll();
+		} catch (Exception e) {
+			resp = new UserSearchCriteriaResp(100);
+			LOG.error(e.toString());
+		}
+		
 		LOG.debug("End");
-		return "";
+		return resp;
 	}
 	
 	@POST
@@ -64,6 +77,9 @@ public class UserAction {
 		try {
 			LOG.debug(req);
 			service.saveUser(req);
+		} catch (CustomerException cx) {
+			resp.setStatusCode(cx.errCode);
+			LOG.error(cx.toString());
 		} catch (Exception e) {
 			resp.setStatusCode(100);
 			LOG.error(e.toString());
@@ -82,6 +98,30 @@ public class UserAction {
 		try {
 			LOG.debug(req);
 			service.updateUser(req);
+		} catch (CustomerException cx) {
+			resp.setStatusCode(cx.errCode);
+			LOG.error(cx.toString());
+		} catch (Exception e) {
+			resp.setStatusCode(100);
+			LOG.error(e.toString());
+		}
+		
+		LOG.debug("End");
+		return resp;
+	}
+	
+	@POST
+	@Path("/updateProfile")
+	public CommonCriteriaResp updateProfile(ProfileUpdateCriteriaReq req) {
+		LOG.debug("Start");
+		CommonCriteriaResp resp = new CommonCriteriaResp() {};
+		
+		try {
+			LOG.debug(req);
+			service.updateProfile(req);
+		} catch (CustomerException cx) {
+			resp.setStatusCode(cx.errCode);
+			LOG.error(cx.toString());
 		} catch (Exception e) {
 			resp.setStatusCode(100);
 			LOG.error(e.toString());

@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $scope, $state, loadUsers) {
+angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $scope, $http, $state, loadUsers) {
 	console.log('Start SearchUserCtrl');
 	
 	$scope.$parent.url = 'add';
@@ -7,8 +7,19 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $
 	$scope.data = {};
 	$scope.data.users = loadUsers.users;
 	
-	$scope.deleteUser = function(user) {
-		console.log('deleteUser : ' + user.id);
+	$scope.deleteUser = function(userId) {
+		$http.get('/ricoh/restAct/user/deleteUser?userId=' + userId)
+		.then(function(data) {
+    		if(data.data.statusCode != 0) {
+    			//-- Handle error
+    			console.log("Have error");
+    			return;
+    		}	    		
+    		$scope.data.users = data.data.users;
+	    }, function(response) {
+	    	//-- Handle error
+	    	console.log("Have error");
+	    });
 	}
 	
 	$scope.editUser = function(user) {

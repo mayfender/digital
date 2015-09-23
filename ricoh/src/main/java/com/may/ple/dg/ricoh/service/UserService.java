@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,8 +15,10 @@ import org.springframework.stereotype.Service;
 
 import com.may.ple.dg.ricoh.constant.RolesConstant;
 import com.may.ple.dg.ricoh.criteria.PersistUserCriteriaReq;
+import com.may.ple.dg.ricoh.criteria.ProfileUpdateCriteriaReq;
 import com.may.ple.dg.ricoh.entity.Role;
 import com.may.ple.dg.ricoh.entity.User;
+import com.may.ple.dg.ricoh.exception.CustomerException;
 import com.may.ple.dg.ricoh.repository.UserRepository;
 
 @Service
@@ -37,6 +40,11 @@ public class UserService {
 	
 	public void saveUser(PersistUserCriteriaReq req) throws Exception {
 		try {
+			User u = userRepository.findByUserName(req.getUserName());
+			if(u != null) {
+				throw new CustomerException(200, "This username is existing");
+			}
+			
 			String password = passwordEncoder.encode(new String(Base64.decode(req.getPassword().getBytes())));
 			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
 			Date currentDate = new Date();
@@ -51,6 +59,11 @@ public class UserService {
 	
 	public void updateUser(PersistUserCriteriaReq req) throws Exception {
 		try {
+			User u = userRepository.findByUserName(req.getUserName());
+			if(u != null) {
+				throw new CustomerException(200, "This username is existing");
+			}
+			
 			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
 			Role r = roles.get(0);
 			
@@ -64,6 +77,38 @@ public class UserService {
 			role.setAuthority(r.getAuthority());
 			role.setName(r.getName());
 			
+			userRepository.save(user);
+		} catch (Exception e) {
+			LOG.debug(e.toString());
+			throw e;
+		}
+	}
+	
+	public void deleteUser(long userId) throws Exception {
+		try {
+			userRepository.delete(userId);
+		} catch (Exception e) {
+			LOG.debug(e.toString());
+			throw e;
+		}
+	}
+	
+	public void updateProfile(ProfileUpdateCriteriaReq req) throws Exception {
+		try {
+			User u = userRepository.findByUserName(req.getNewUserName());
+			if(u != null) {
+				throw new CustomerException(200, "This username is existing");
+			}
+			
+			User user = userRepository.findByUserName(req.getOldUserName());
+			user.setUserName(req.getNewUserName());
+			user.setUpdatedDateTime(new Date());
+			
+			if(!StringUtils.isBlank(req.getPassword())) {
+				String password = passwordEncoder.encode(new String(Base64.decode(req.getPassword().getBytes())));		
+				user.setPassword(password);
+			}
+						
 			userRepository.save(user);
 		} catch (Exception e) {
 			LOG.debug(e.toString());

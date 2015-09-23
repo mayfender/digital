@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http) {
+angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http, $state) {
 	console.log('Start AddUserCtrl');
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
@@ -24,14 +24,15 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			userName: $scope.user.userName,
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
-		}).success(function(data) {
-			if(data.statusCode != 0) {
+		}).then(function(data) {
+			if(data.data.statusCode != 0) {
 				// Manage Error
+				return;
 			}
 			console.log("Save success");
-		}).error(function(data) {
+			$state.go('dashboard.user.search');
+		}, function(response) {
 			// Manage Error
-			
 			console.log("Save error");
 		});
 	}
@@ -42,14 +43,15 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			password: btoa($scope.user.password),
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
-		}).success(function(data) {
-			if(data.statusCode != 0) {
-				// Manage Error
+		}).then(function(data) {
+			if(data.data.statusCode != 0) {
+				// Manage Error.
+				return;
 			}
 			console.log("Save success");
-		}).error(function(data) {
+			$state.go('dashboard.user.search');
+		}, function(response) {
 			// Manage Error
-			
 			console.log("Save error");
 		});
 	}

@@ -16,13 +16,11 @@ angular
     'angular-loading-bar',
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-    
-	//$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 	  
-    $ocLazyLoadProvider.config({
-      debug:false,
-      events:true,
-    });
+	 $ocLazyLoadProvider.config({
+	      debug:false,
+	      events:true,
+	 });
 
     $urlRouterProvider.otherwise('/dashboard/may');
 
@@ -123,15 +121,20 @@ angular
               });
             },
             loadUsers:function($rootScope, $http, $state) {
-            	return $http.get('/ricoh/restAct/user/findUserAll').then(function(data){
-            		if(data.data.statusCode != 0) {
-            			$rootScope.error = true;
-            			$rootScope.msg = "Server Error!";
-            			$state.go($state.current, {}, {reload: false});
-            		}
+            	return $http.get('/ricoh/restAct/user/findUserAll')
+            		  .then(function(data){
+		            		if(data.data.statusCode != 0) {
+		            			$rootScope.error = true;
+		            			$rootScope.msg = "Server Error!";
+		            			$state.go($state.current, {}, {reload: false});
+		            		}
             		
-            		return data.data;
-            	});
+		            		return data.data;
+		            	}, function(response) {
+		        	    	//-- Handle error
+		        	    	console.log("Have error");
+		        	    	$state.go($state.current, {}, {reload: false});
+		        	    });
             }
     	}
     })
@@ -153,20 +156,13 @@ angular
     .state('dashboard.profile',{
         templateUrl:'views/profile/main.html',
         url:'/profile',
-    	controller: function($rootScope, $scope){
-    		console.log('Start profile');
-    		
-    		$scope.data = {};
-    		$scope.data.role = $rootScope.principal.authorities[0].authority;
-    		$scope.data.username = $rootScope.principal.username;
-    		$scope.data.password;
-    		$scope.data.reTypePassword;
-    	},
+    	controller: "ProfileCtrl",
     	resolve: {
             loadMyFiles:function($ocLazyLoad) {
               return $ocLazyLoad.load({
             	  name:'sbAdminApp',
-                  files:['styles/profile.css']
+                  files:['styles/profile.css',
+                         'scripts/controllers/profileCtrl.js']
               });
             }
     	}
@@ -234,6 +230,4 @@ angular
        templateUrl:'views/ui-elements/grid.html',
        url:'/grid'
    })
-  }]);
-
-    
+}]);
