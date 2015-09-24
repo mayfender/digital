@@ -46,6 +46,9 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		}).then(function(data) {
 			if(data.data.statusCode != 0) {
 				// Manage Error.
+				console.log("have error");
+				$scope.userNameErr = 'has-error';
+				$scope.errMsg = 'Please use others name';
 				return;
 			}
 			console.log("Save success");
