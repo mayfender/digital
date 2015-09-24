@@ -4,8 +4,11 @@
 			<div class="form-inline" ng-hide="isEdit">
 				<label>Auto Generated</label> <input type="checkbox" value="" ng-model="autoGen" ng-change="autoGenEvent()">
 			</div>
-			<div class="form-group" ng-class="userNameErr">
-				<label class="control-label">Username {{errMsg}}</label> 
+			<div class="form-group" ng-class="userNameErrStyle">
+				<label class="control-label">Username</label>
+				<span class="text-danger" ng-show="userNameErrStyle" style="position: absolute; right: 0px;">
+					<i class='fa fa-warning fa-fw'></i><em>{{ msg }}</em>
+				</span>
 				<input class="form-control" ng-model="user.userName">
 			</div>
 			<div class="form-group">

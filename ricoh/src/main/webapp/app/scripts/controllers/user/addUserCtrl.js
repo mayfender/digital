@@ -45,10 +45,12 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			status: $scope.user.enabled
 		}).then(function(data) {
 			if(data.data.statusCode != 0) {
-				// Manage Error.
 				console.log("have error");
-				$scope.userNameErr = 'has-error';
-				$scope.errMsg = 'Please use others name';
+				
+				if(data.data.statusCode == 200) {
+					$scope.userNameErrStyle = 'has-error';
+					$scope.msg = "Please use other name";
+				}
 				return;
 			}
 			console.log("Save success");
