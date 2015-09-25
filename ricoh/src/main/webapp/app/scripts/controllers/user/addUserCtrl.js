@@ -49,7 +49,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 				
 				if(data.data.statusCode == 200) {
 					$scope.userNameErrStyle = 'has-error';
-					$scope.msg = "Please use other name";
+					$scope.msg = "Username already exists";
 				}
 				return;
 			}

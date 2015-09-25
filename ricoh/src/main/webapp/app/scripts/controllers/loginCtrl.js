@@ -12,10 +12,8 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	        if ($scope.authenticated) {
 	        	$state.go("dashboard.user.search");
 	        	$rootScope.error = false;
-	        	$rootScope.msg = null;
 	        } else {
 	        	$rootScope.error = true;
-	        	$rootScope.msg = "Invalid!";
 	        }
 	   });
 	}
@@ -23,27 +21,35 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	var authenticate = function(credentials, callback) {
 	    var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password), 'X-Requested-With' : 'XMLHttpRequest'} : {};
 
-	    $http.get('/ricoh/user', {headers : headers}).success(function(data) {
-		    if (data.name) {
-		    	$rootScope.principal = data.principal;
+	    $http.get('/ricoh/user', {headers : headers}).
+	    then(function(data) {
+		    if (data.data.name) {
+		    	$rootScope.principal = data.data.principal;
 		        $scope.authenticated = true;
+		        $rootScope.msg = null;
 		    } else {
 		    	$scope.authenticated = false;
+		    	$rootScope.msg = "Account does not exist";
 		    }
 		    
 		    callback && callback();
-	    }).error(function() {
+	    }, function(response) {
+	    	if(response.data.error == 'Unauthorized') {
+	    		$rootScope.msg = "Account does not exist";
+	    	} else {
+	    		$rootScope.msg = "Failed to Connect";	    		
+	    	}
+	    	
 	    	$scope.authenticated = false;
 	    	callback && callback();
 	    });
 	}
 	
 	var logout = function() {
-		$http.post('/ricoh/logout', {}).success(function() {
-			console.log("Logout success");
+		$http.post('/ricoh/logout', {}).
+		then(function(data) {
 			$scope.authenticated = false;
-		}).error(function(data) {
-			console.log("Logout error");
+		}, function(response) {
 			$scope.authenticated = false;
 		});
 	}
