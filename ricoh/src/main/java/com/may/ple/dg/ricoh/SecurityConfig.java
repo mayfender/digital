@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh;
+/*package com.may.ple.dg.ricoh;
 
 import javax.sql.DataSource;
 
@@ -55,3 +55,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 }
+*/

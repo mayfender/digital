@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.service;
+/*package com.may.ple.dg.ricoh.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,3 +132,4 @@ public class UserService {
 	}
 	
 }
+*/

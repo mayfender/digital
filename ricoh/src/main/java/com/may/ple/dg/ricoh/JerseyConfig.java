@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh;
+/*package com.may.ple.dg.ricoh;
 
 import javax.ws.rs.ApplicationPath;
 
@@ -19,3 +19,4 @@ public class JerseyConfig extends ResourceConfig {
 	}
 
 }
+*/

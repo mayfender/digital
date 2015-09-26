@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.repository;
+/*package com.may.ple.dg.ricoh.repository;
 
 import java.util.List;
 
@@ -12,3 +12,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findByStatus(int status);
 
 }
+*/

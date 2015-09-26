@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.entity;
+/*package com.may.ple.dg.ricoh.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,12 +23,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/* --------------: Use for native query
+ --------------: Use for native query
  * @NamedNativeQueries({ 
 	@NamedNativeQuery (name = "User.findByStatus", 
 				query = "select * from user where enabled = ?1", 
 				resultClass = User.class)
-})*/
+})
 
 @NamedQueries({ 
 	@NamedQuery(name = "User.findByStatus", 
@@ -128,3 +128,4 @@ public class User implements Serializable {
 	}
 	
 }
+*/

@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.criteria;
+/*package com.may.ple.dg.ricoh.criteria;
 
 import java.util.List;
 
@@ -29,3 +29,4 @@ public class UserSearchCriteriaResp extends CommonCriteriaResp {
 		this.users = users;
 	}
 }
+*/

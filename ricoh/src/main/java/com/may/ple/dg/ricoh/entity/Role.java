@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.entity;
+/*package com.may.ple.dg.ricoh.entity;
 
 import java.io.Serializable;
 
@@ -68,3 +68,4 @@ public class Role implements Serializable {
 	}
 	
 }
+*/

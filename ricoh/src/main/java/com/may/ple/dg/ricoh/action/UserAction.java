@@ -1,4 +1,4 @@
-package com.may.ple.dg.ricoh.action;
+/*package com.may.ple.dg.ricoh.action;
 
 import java.util.List;
 
@@ -132,3 +132,4 @@ public class UserAction {
 	}
 
 }
+*/
