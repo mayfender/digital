@@ -59,18 +59,20 @@ public class UserService {
 	
 	public void updateUser(PersistUserCriteriaReq req) throws Exception {
 		try {
-			User u = userRepository.findByUserName(req.getUserName());
-			if(u != null) {
-				throw new CustomerException(200, "This username is existing");
+			User user = userRepository.findOne(req.getId());
+			
+			if(!user.getUserName().equals(req.getUserName())) {
+				User u = userRepository.findByUserName(req.getUserName());
+				if(u != null)
+					throw new CustomerException(200, "This username is existing");
 			}
 			
-			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
-			Role r = roles.get(0);
-			
-			User user = userRepository.findOne(req.getId());
 			user.setUserName(req.getUserName());
 			user.setEnabled(req.getStatus());
 			user.setUpdatedDateTime(new Date());
+			
+			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
+			Role r = roles.get(0);
 			
 			Role role = user.getRoles().get(0);
 			role.setUserName(req.getUserName());
@@ -95,9 +97,10 @@ public class UserService {
 	
 	public void updateProfile(ProfileUpdateCriteriaReq req) throws Exception {
 		try {
-			User u = userRepository.findByUserName(req.getNewUserName());
-			if(u != null) {
-				throw new CustomerException(200, "This username is existing");
+			if(!req.getNewUserName().equals(req.getOldUserName())) {
+				User u = userRepository.findByUserName(req.getNewUserName());
+				if(u != null)
+					throw new CustomerException(200, "This username is existing");	
 			}
 			
 			User user = userRepository.findByUserName(req.getOldUserName());
