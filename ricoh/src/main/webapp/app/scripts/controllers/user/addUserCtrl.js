@@ -54,9 +54,8 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			if(data.data.statusCode != 0) {
 				console.log("have error");
 				
-				if(data.data.statusCode == 200) {
-					$scope.existingUserErrMsg = "Username already exists";
-				}
+				if(data.data.statusCode == 200) $scope.existingUserErrMsg = "Username already exists";
+				
 				return;
 			}
 			console.log("Save success");
