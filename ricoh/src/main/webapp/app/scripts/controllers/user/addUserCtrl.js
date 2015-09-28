@@ -38,6 +38,13 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 	}
 	
 	$scope.save = function() {
+		var result = confirmPassword();
+		
+		if(!result && !$scope.autoGen) {
+			$scope.notMatchRepassErrMsg = "Must match the previous entry";
+			return;
+		}
+		
 		$http.post('/ricoh/restAct/user/saveUser', {
 			userName: $scope.user.userName,
 			password: btoa($scope.user.password),
@@ -48,8 +55,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 				console.log("have error");
 				
 				if(data.data.statusCode == 200) {
-					$scope.userNameErrStyle = 'has-error';
-					$scope.msg = "Username already exists";
+					$scope.existingUserErrMsg = "Username already exists";
 				}
 				return;
 			}
@@ -78,4 +84,9 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		$scope.autoGen = false;
 		$scope.user.roles[0].authority = "";
 	} 
+	
+	function confirmPassword() {
+		return ($scope.user.password == $scope.user.reTypePassword);
+	}
+	
 });

@@ -5,25 +5,29 @@
 				<label>Auto Generated</label>
 				<input type="checkbox" value="" ng-model="autoGen" ng-change="autoGenEvent()">
 			</div>
-			<div class="form-group" ng-class="userNameErrStyle">
-				<label class="control-label">Username</label>
-				<span class="text-danger" ng-show="userNameErrStyle" style="position: absolute; right: 0px;">
-					<i class='fa fa-warning fa-fw'></i><em>{{ msg }}</em>
+			<div class="form-group" ng-class="{'has-error':addUserForm.userName.$invalid || existingUserErrMsg}">
+				<label class="control-label">Username *</label>
+				<span class="text-danger" ng-show="existingUserErrMsg" style="position: absolute; right: 0px;">
+					<i class='fa fa-warning fa-fw'></i><em>{{ existingUserErrMsg }}</em>
 				</span>
-				<input name="userName" class="form-control" ng-model="user.userName" ng-disabled="autoGen" required>
+				<input name="userName" class="form-control" ng-model="user.userName" ng-change="existingUserErrMsg = null" ng-disabled="autoGen" required>
 			</div>
-			<div class="form-group">
-				<label>Password</label>
-				<input class="form-control" type="password" ng-model="user.password" ng-disabled="isEdit || autoGen" ng-required="!isEdit">
+			<div class="form-group" ng-class="{'has-error':addUserForm.password.$invalid}">
+				<label class="control-label">Password *</label>
+				<input name="password" class="form-control" type="password" ng-model="user.password" ng-disabled="isEdit || autoGen" ng-required="!isEdit">
 				<p class="help-block" ng-show="autoGen">Generated Password is {{ user.password }}</p>
 			</div>
-			<div class="form-group" ng-show="!autoGen">
-				<label>Re-type Password</label>
-				<input class="form-control" type="password" ng-model="user.reTypePassword" ng-disabled="isEdit">
+			<div class="form-group" ng-show="!autoGen" ng-class="{'has-error':addUserForm.repassword.$invalid || notMatchRepassErrMsg}">
+				<label class="control-label">Re-type Password *</label>
+				<span class="text-danger" ng-show="notMatchRepassErrMsg" style="position: absolute; right: 0px;">
+					<i class='fa fa-warning fa-fw'></i><em>{{ notMatchRepassErrMsg }}</em>
+				</span>
+				<input name="repassword" class="form-control" type="password" ng-model="user.reTypePassword" 
+				ng-change="notMatchRepassErrMsg = null" ng-disabled="isEdit" ng-required="!isEdit && !autoGen">
 			</div>
-			<div class="form-group">
-				<label>Select Role</label> 
-				<select class="form-control" ng-model="user.roles[0].authority" required>
+			<div class="form-group" ng-class="{'has-error':addUserForm.roles.$invalid}">
+				<label class="control-label">Select Role *</label> 
+				<select name="roles" class="form-control" ng-model="user.roles[0].authority" required>
 					<option value="">Please select role</option>
 					<option value="ROLE_USER">User</option>
 					<option value="ROLE_ADMIN">Admin</option>

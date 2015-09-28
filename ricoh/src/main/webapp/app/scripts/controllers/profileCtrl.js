@@ -8,8 +8,10 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 	$scope.data.reTypePassword = "";
 	
 	$scope.updateProfile = function() {
-		if(!($scope.data.password == $scope.data.reTypePassword)) {
-			alert("Password and Re-Password not equal");
+		var result = confirmPassword();
+		
+		if(!result) {
+			$scope.notMatchRepassErrMsg = "Must match the previous entry";
 			return;
 		}
 		
@@ -33,6 +35,10 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 			// Manage Error
 			console.log("Save error");
 		});
+	}
+	
+	function confirmPassword() {
+		return ($scope.data.password == $scope.data.reTypePassword);
 	}
 	
 });
