@@ -29,15 +29,15 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		        $rootScope.msg = null;
 		    } else {
 		    	$scope.authenticated = false;
-		    	$rootScope.msg = "Account does not exist";
+		    	$rootScope.msg = 'Account does not exist';
 		    }
 		    
 		    callback && callback();
 	    }, function(response) {
 	    	if(response.data.error == 'Unauthorized') {
-	    		$rootScope.msg = "Account does not exist";
+	    		$rootScope.msg = 'Account does not exist';
 	    	} else {
-	    		$rootScope.msg = "Failed to Connect";	    		
+	    		$rootScope.msg = 'Failed to Connect';	    		
 	    	}
 	    	
 	    	$scope.authenticated = false;
