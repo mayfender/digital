@@ -33,7 +33,7 @@ public class UserService {
 		try {
 			return userRepository.findAll(new Sort(Direction.ASC, "userName"));
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
@@ -52,7 +52,7 @@ public class UserService {
 			User user = new User(req.getUserName(), password, currentDate, currentDate, req.getStatus(), roles);
 			userRepository.save(user);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
@@ -81,7 +81,7 @@ public class UserService {
 			
 			userRepository.save(user);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
@@ -90,7 +90,7 @@ public class UserService {
 		try {
 			userRepository.delete(userId);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
@@ -114,7 +114,7 @@ public class UserService {
 						
 			userRepository.save(user);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
