@@ -71,6 +71,8 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			$scope.user.userName = 'gen_' + Math.floor(Date.now() / 1000);
 			$scope.user.password = '1234';    	
 			$scope.user.roles[0].authority = "";
+			$scope.existingUserErrMsg = null;
+			$scope.notMatchRepassErrMsg = null;
 		}else{
 			setNull();
 		}    			
