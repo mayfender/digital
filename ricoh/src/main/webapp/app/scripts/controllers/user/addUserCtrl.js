@@ -84,6 +84,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		$scope.user.password = null;
 		$scope.autoGen = false;
 		$scope.user.roles[0].authority = "";
+		$scope.user.enabled = 1;
 	} 
 	
 	function confirmPassword() {
