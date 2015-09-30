@@ -31,11 +31,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })*/
 
 @NamedQueries({ 
-	@NamedQuery(name = "User.findByStatus", 
-			query = "select u from User u where u.enabled = ?1 order by u.userName asc") 
+	@NamedQuery(name = "Users.findByStatus", 
+			query = "select u from Users u where u.enabled = ?1 order by u.userName asc") 
 })
 @Entity
-public class User implements Serializable {
+public class Users implements Serializable {
 	private static final long serialVersionUID = 6644354613536505474L;
 	@Id
 	@GeneratedValue
@@ -53,9 +53,9 @@ public class User implements Serializable {
 	private Date updatedDateTime;
 	private int enabled;	
 	
-	protected User() {}
+	protected Users() {}
 	
-	public User(String userName, String password, Date createdDateTime, Date updatedDateTime, int enabled, List<Role> roles) {
+	public Users(String userName, String password, Date createdDateTime, Date updatedDateTime, int enabled, List<Role> roles) {
 		this.userName = userName;
 		this.password = password;
 		this.createdDateTime = createdDateTime;

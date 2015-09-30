@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.may.ple.dg.ricoh.entity.User;
+import com.may.ple.dg.ricoh.entity.Users;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<Users, Long> {
 	
-	User findByUserName(String userName);
-	List<User> findByStatus(int status);
+	Users findByUserName(String userName);
+	List<Users> findByStatus(int status);
 
 }
