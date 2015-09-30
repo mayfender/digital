@@ -17,7 +17,7 @@ import com.may.ple.dg.ricoh.criteria.CommonCriteriaResp;
 import com.may.ple.dg.ricoh.criteria.PersistUserCriteriaReq;
 import com.may.ple.dg.ricoh.criteria.ProfileUpdateCriteriaReq;
 import com.may.ple.dg.ricoh.criteria.UserSearchCriteriaResp;
-import com.may.ple.dg.ricoh.entity.User;
+import com.may.ple.dg.ricoh.entity.Users;
 import com.may.ple.dg.ricoh.exception.CustomerException;
 import com.may.ple.dg.ricoh.service.UserService;
 
@@ -38,7 +38,7 @@ public class UserAction {
 		UserSearchCriteriaResp resp = new UserSearchCriteriaResp();
 		
 		try {
-			List<User> users = service.findAllUser();
+			List<Users> users = service.findAllUser();
 			resp.setUsers(users);
 		} catch (Exception e) {
 			resp.setStatusCode(100);

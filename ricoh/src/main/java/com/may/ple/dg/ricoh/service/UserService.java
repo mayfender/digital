@@ -17,7 +17,7 @@ import com.may.ple.dg.ricoh.constant.RolesConstant;
 import com.may.ple.dg.ricoh.criteria.PersistUserCriteriaReq;
 import com.may.ple.dg.ricoh.criteria.ProfileUpdateCriteriaReq;
 import com.may.ple.dg.ricoh.entity.Role;
-import com.may.ple.dg.ricoh.entity.User;
+import com.may.ple.dg.ricoh.entity.Users;
 import com.may.ple.dg.ricoh.exception.CustomerException;
 import com.may.ple.dg.ricoh.repository.UserRepository;
 
@@ -29,18 +29,18 @@ public class UserService {
 	@Autowired	
 	private PasswordEncoder passwordEncoder;
 	
-	public List<User> findAllUser() {
+	public List<Users> findAllUser() {
 		try {
 			return userRepository.findAll(new Sort(Direction.ASC, "userName"));
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
 	
 	public void saveUser(PersistUserCriteriaReq req) throws Exception {
 		try {
-			User u = userRepository.findByUserName(req.getUserName());
+			Users u = userRepository.findByUserName(req.getUserName());
 			if(u != null) {
 				throw new CustomerException(200, "This username is existing");
 			}
@@ -49,20 +49,20 @@ public class UserService {
 			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
 			Date currentDate = new Date();
 			
-			User user = new User(req.getUserName(), password, currentDate, currentDate, req.getStatus(), roles);
+			Users user = new Users(req.getUserName(), password, currentDate, currentDate, req.getStatus(), roles);
 			userRepository.save(user);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
 	
 	public void updateUser(PersistUserCriteriaReq req) throws Exception {
 		try {
-			User user = userRepository.findOne(req.getId());
+			Users user = userRepository.findOne(req.getId());
 			
 			if(!user.getUserName().equals(req.getUserName())) {
-				User u = userRepository.findByUserName(req.getUserName());
+				Users u = userRepository.findByUserName(req.getUserName());
 				if(u != null)
 					throw new CustomerException(200, "This username is existing");
 			}
@@ -81,7 +81,7 @@ public class UserService {
 			
 			userRepository.save(user);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
@@ -90,7 +90,7 @@ public class UserService {
 		try {
 			userRepository.delete(userId);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}
@@ -98,12 +98,12 @@ public class UserService {
 	public void updateProfile(ProfileUpdateCriteriaReq req) throws Exception {
 		try {
 			if(!req.getNewUserName().equals(req.getOldUserName())) {
-				User u = userRepository.findByUserName(req.getNewUserName());
+				Users u = userRepository.findByUserName(req.getNewUserName());
 				if(u != null)
 					throw new CustomerException(200, "This username is existing");	
 			}
 			
-			User user = userRepository.findByUserName(req.getOldUserName());
+			Users user = userRepository.findByUserName(req.getOldUserName());
 			user.setUserName(req.getNewUserName());
 			user.setUpdatedDateTime(new Date());
 			
@@ -114,7 +114,7 @@ public class UserService {
 						
 			userRepository.save(user);
 		} catch (Exception e) {
-			LOG.debug(e.toString());
+			LOG.error(e.toString());
 			throw e;
 		}
 	}

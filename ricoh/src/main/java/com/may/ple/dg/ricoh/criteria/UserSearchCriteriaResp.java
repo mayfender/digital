@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.may.ple.dg.ricoh.entity.User;
+import com.may.ple.dg.ricoh.entity.Users;
 
 public class UserSearchCriteriaResp extends CommonCriteriaResp {
-	private List<User> users;
+	private List<Users> users;
 	
 	public UserSearchCriteriaResp() {}
 	
@@ -21,11 +21,11 @@ public class UserSearchCriteriaResp extends CommonCriteriaResp {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 
-	public List<User> getUsers() {
+	public List<Users> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(List<Users> users) {
 		this.users = users;
 	}
 }
