@@ -19,7 +19,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 	}
 	
 	$scope.update = function() {
-		$http.post('/ricoh/restAct/user/updateUser', {
+		$http.post('/restAct/user/updateUser', {
 			id: $scope.user.id,
 			userName: $scope.user.userName,
 			authority: $scope.user.roles[0].authority,
@@ -45,7 +45,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			return;
 		}
 		
-		$http.post('/ricoh/restAct/user/saveUser', {
+		$http.post('/restAct/user/saveUser', {
 			userName: $scope.user.userName,
 			password: btoa($scope.user.password),
 			authority: $scope.user.roles[0].authority,

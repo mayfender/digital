@@ -16,7 +16,7 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 		}
 		
 		console.log("Continue to call backend");
-		$http.post('/ricoh/restAct/user/updateProfile', {
+		$http.post('/restAct/user/updateProfile', {
 			oldUserName: $rootScope.principal.username,
 			newUserName: $scope.data.username,
 			password: $scope.data.password && btoa($scope.data.password)

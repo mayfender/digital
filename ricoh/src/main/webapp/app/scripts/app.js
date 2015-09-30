@@ -122,7 +122,7 @@ angular
               });
             },
             loadUsers:function($rootScope, $http, $state) {
-            	return $http.get('/ricoh/restAct/user/findUserAll')
+            	return $http.get('/restAct/user/findUserAll')
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
 		            			$rootScope.error = true;

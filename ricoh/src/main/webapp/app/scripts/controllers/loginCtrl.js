@@ -21,7 +21,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	var authenticate = function(credentials, callback) {
 	    var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password), 'X-Requested-With' : 'XMLHttpRequest'} : {};
 
-	    $http.get('/ricoh/user', {headers : headers}).
+	    $http.get('/user', {headers : headers}).
 	    then(function(data) {
 		    if (data.data.name) {
 		    	$rootScope.principal = data.data.principal;
@@ -46,7 +46,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	}
 	
 	var logout = function() {
-		$http.post('/ricoh/logout', {}).
+		$http.post('/logout', {}).
 		then(function(data) {
 			$scope.authenticated = false;
 		}, function(response) {
