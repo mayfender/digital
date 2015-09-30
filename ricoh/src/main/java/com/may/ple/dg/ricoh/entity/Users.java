@@ -9,11 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -38,13 +40,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Users implements Serializable {
 	private static final long serialVersionUID = 6644354613536505474L;
 	@Id
-	@GeneratedValue
+	@TableGenerator(name="userId", pkColumnValue="users.id", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="userId")
 	private Long id;
 	@Column(name="username", nullable=false)
 	private String userName;
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinColumn(name="username", referencedColumnName="username")
-	private List<Role> roles;
+	private List<Roles> roles;
 	@Column(name="password", nullable=false)
 	private String password;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -55,7 +58,7 @@ public class Users implements Serializable {
 	
 	protected Users() {}
 	
-	public Users(String userName, String password, Date createdDateTime, Date updatedDateTime, int enabled, List<Role> roles) {
+	public Users(String userName, String password, Date createdDateTime, Date updatedDateTime, int enabled, List<Roles> roles) {
 		this.userName = userName;
 		this.password = password;
 		this.createdDateTime = createdDateTime;
@@ -95,11 +98,11 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
+	public List<Roles> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
 

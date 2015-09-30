@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import com.may.ple.dg.ricoh.constant.RolesConstant;
 import com.may.ple.dg.ricoh.criteria.PersistUserCriteriaReq;
 import com.may.ple.dg.ricoh.criteria.ProfileUpdateCriteriaReq;
-import com.may.ple.dg.ricoh.entity.Role;
+import com.may.ple.dg.ricoh.entity.Roles;
 import com.may.ple.dg.ricoh.entity.Users;
 import com.may.ple.dg.ricoh.exception.CustomerException;
 import com.may.ple.dg.ricoh.repository.UserRepository;
@@ -46,7 +46,7 @@ public class UserService {
 			}
 			
 			String password = passwordEncoder.encode(new String(Base64.decode(req.getPassword().getBytes())));
-			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
+			List<Roles> roles = getRole(req.getUserName(), req.getAuthority());
 			Date currentDate = new Date();
 			
 			Users user = new Users(req.getUserName(), password, currentDate, currentDate, req.getStatus(), roles);
@@ -71,10 +71,10 @@ public class UserService {
 			user.setEnabled(req.getStatus());
 			user.setUpdatedDateTime(new Date());
 			
-			List<Role> roles = getRole(req.getUserName(), req.getAuthority());
-			Role r = roles.get(0);
+			List<Roles> roles = getRole(req.getUserName(), req.getAuthority());
+			Roles r = roles.get(0);
 			
-			Role role = user.getRoles().get(0);
+			Roles role = user.getRoles().get(0);
 			role.setUserName(req.getUserName());
 			role.setAuthority(r.getAuthority());
 			role.setName(r.getName());
@@ -119,14 +119,14 @@ public class UserService {
 		}
 	}
 	
-	private List<Role> getRole(String userName, String authority) throws Exception {
+	private List<Roles> getRole(String userName, String authority) throws Exception {
 		RolesConstant roleConstant = RolesConstant.valueOf(authority);
 		
 		if(roleConstant == null)
 			throw new Exception("Not found Role from authority : " + authority);
 		
-		List<Role> roles = new ArrayList<Role>();
-		Role role = new Role(userName, roleConstant.toString(), roleConstant.getName());
+		List<Roles> roles = new ArrayList<Roles>();
+		Roles role = new Roles(userName, roleConstant.toString(), roleConstant.getName());
 		roles.add(role);
 		return roles;
 	}

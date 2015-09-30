@@ -5,16 +5,19 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Entity
-public class Role implements Serializable {
+public class Roles implements Serializable {
 	private static final long serialVersionUID = -1077652018007382773L;
 	@Id
-	@GeneratedValue
+	@TableGenerator(name="roleId", pkColumnValue="roles.id", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="roleId")
 	private Long id;
 	@Column(name="username", nullable=false)
 	private String userName;
@@ -22,9 +25,9 @@ public class Role implements Serializable {
 	private String authority;
 	private String name;
 
-	protected Role() {}
+	protected Roles() {}
 	
-	public Role(String userName, String authority, String name) {
+	public Roles(String userName, String authority, String name) {
 		this.userName = userName;
 		this.authority = authority;
 		this.name = name;
