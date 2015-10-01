@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $scope, $base64, $http) {
+angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $scope, $base64, $http, urlPrefix) {
 	
 	$scope.data = {};
 	$scope.data.role = $rootScope.principal.authorities[0].authority;
@@ -15,20 +15,20 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 		}
 		
 		console.log("Continue to call backend");
-		$http.post('/restAct/user/updateProfile', {
+		$http.post(urlPrefix + '/restAct/user/updateProfile', {
 			oldUserName: $rootScope.principal.username,
 			newUserName: $scope.data.username,
 			password: $scope.data.password && $base64.encode($scope.data.password)
 		}).then(function(data) {
-			console.log(data);
 			if(data.data.statusCode != 0) {
-				// Manage Error
+				if(data.data.statusCode == 2000) $scope.existingUserErrMsg = "Username already exists";
 				return;
 			}
 			
 			$rootScope.principal.username = $scope.data.username;
 			$scope.data.password = "";
 			$scope.data.reTypePassword = "";
+			$scope.existingUserErrMsg = null;
 		}, function(response) {
 			// Manage Error
 			console.log("Save error");

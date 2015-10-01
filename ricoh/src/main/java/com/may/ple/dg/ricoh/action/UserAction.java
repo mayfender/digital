@@ -43,7 +43,7 @@ public class UserAction {
 			List<Users> users = service.findAllUser();
 			resp.setUsers(users);
 		} catch (Exception e) {
-			resp.setStatusCode(100);
+			resp.setStatusCode(1000);
 			LOG.error(e.toString());
 		}
 		
@@ -63,7 +63,7 @@ public class UserAction {
 			service.deleteUser(userId);
 			resp = findUserAll();
 		} catch (Exception e) {
-			resp = new UserSearchCriteriaResp(100);
+			resp = new UserSearchCriteriaResp(1000);
 			LOG.error(e.toString());
 		}
 		
@@ -85,7 +85,7 @@ public class UserAction {
 			resp.setStatusCode(cx.errCode);
 			LOG.error(cx.toString());
 		} catch (Exception e) {
-			resp.setStatusCode(100);
+			resp.setStatusCode(1000);
 			LOG.error(e.toString());
 		}
 		
@@ -107,7 +107,7 @@ public class UserAction {
 			resp.setStatusCode(cx.errCode);
 			LOG.error(cx.toString());
 		} catch (Exception e) {
-			resp.setStatusCode(100);
+			resp.setStatusCode(1000);
 			LOG.error(e.toString());
 		}
 		
@@ -117,7 +117,6 @@ public class UserAction {
 	
 	@POST
 	@Path("/updateProfile")
-	@Secured("ROLE_ADMIN")
 	public CommonCriteriaResp updateProfile(ProfileUpdateCriteriaReq req) {
 		LOG.debug("Start");
 		CommonCriteriaResp resp = new CommonCriteriaResp() {};
@@ -129,7 +128,7 @@ public class UserAction {
 			resp.setStatusCode(cx.errCode);
 			LOG.error(cx.toString());
 		} catch (Exception e) {
-			resp.setStatusCode(100);
+			resp.setStatusCode(1000);
 			LOG.error(e.toString());
 		}
 		

@@ -42,7 +42,7 @@ public class UserService {
 		try {
 			Users u = userRepository.findByUserName(req.getUserName());
 			if(u != null) {
-				throw new CustomerException(200, "This username is existing");
+				throw new CustomerException(2000, "This username is existing");
 			}
 			
 			String password = passwordEncoder.encode(new String(Base64.decode(req.getPassword().getBytes())));
@@ -64,7 +64,7 @@ public class UserService {
 			if(!user.getUserName().equals(req.getUserName())) {
 				Users u = userRepository.findByUserName(req.getUserName());
 				if(u != null)
-					throw new CustomerException(200, "This username is existing");
+					throw new CustomerException(2000, "This username is existing");
 			}
 			
 			user.setUserName(req.getUserName());
@@ -100,7 +100,7 @@ public class UserService {
 			if(!req.getNewUserName().equals(req.getOldUserName())) {
 				Users u = userRepository.findByUserName(req.getNewUserName());
 				if(u != null)
-					throw new CustomerException(200, "This username is existing");	
+					throw new CustomerException(2000, "This username is existing");	
 			}
 			
 			Users user = userRepository.findByUserName(req.getOldUserName());

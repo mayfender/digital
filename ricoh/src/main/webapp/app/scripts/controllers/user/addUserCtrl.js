@@ -52,7 +52,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			if(data.data.statusCode != 0) {
 				console.log("have error");
 				
-				if(data.data.statusCode == 200) $scope.existingUserErrMsg = "Username already exists";
+				if(data.data.statusCode == 2000) $scope.existingUserErrMsg = "Username already exists";
 				
 				return;
 			}
