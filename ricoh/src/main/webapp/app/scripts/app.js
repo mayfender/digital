@@ -134,7 +134,7 @@ angular
             		
 		            		return data.data;
 		            	}, function(response) {
-		            		if(response.data.status == 403) alert('Access denied !  you are not authorized to access this service');
+		            		$rootScope.systemAlert(response.data.status);
 		            		
 		        	    	$state.go($state.current, {}, {reload: false});
 		        	    });

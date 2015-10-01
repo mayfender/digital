@@ -7,6 +7,11 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		event.preventDefault();
 	});
 	
+	$rootScope.systemAlert = function(code) {
+		if(code == 403) alert('Access denied !  you are not authorized to access this service');
+	}
+	
+	
 	$scope.login = function() {		
 		authenticate($scope.credentials, function() {
 	        if ($scope.authenticated) {

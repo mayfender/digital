@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http, $state, $base64, urlPrefix) {
+angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $scope, $stateParams, $http, $state, $base64, urlPrefix) {
 	
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
@@ -31,8 +31,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			
 			$state.go('dashboard.user.search');
 		}, function(response) {
-			// Manage Error
-			console.log("Save error");
+			$rootScope.systemAlert(response.data.status);
 		});
 	}
 	
@@ -60,8 +59,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 			
 			$state.go('dashboard.user.search');
 		}, function(response) {
-			// Manage Error
-			console.log("Save error");
+			$rootScope.systemAlert(response.data.status);
 		});
 	}
 	
