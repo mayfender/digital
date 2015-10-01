@@ -1,11 +1,10 @@
 angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http, $state, $base64, urlPrefix) {
-	console.log('Start AddUserCtrl');
+	
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
 	$scope.$parent.headerTitle = 'User Adding';
 	
 	if($stateParams.user) { //-- Initial edit module
-		console.log('Init edit page');
 		$scope.user = $stateParams.user;
 		$scope.isEdit = true;
 	} else {                // Initial for create module
@@ -29,7 +28,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 				// Manage Error
 				return;
 			}
-			console.log("Save success");
+			
 			$state.go('dashboard.user.search');
 		}, function(response) {
 			// Manage Error
@@ -58,7 +57,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 				
 				return;
 			}
-			console.log("Save success");
+			
 			$state.go('dashboard.user.search');
 		}, function(response) {
 			// Manage Error

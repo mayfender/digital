@@ -1,5 +1,4 @@
 angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $scope, $base64, $http) {
-	console.log('Start profile page');
 	
 	$scope.data = {};
 	$scope.data.role = $rootScope.principal.authorities[0].authority;
@@ -30,7 +29,6 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 			$rootScope.principal.username = $scope.data.username;
 			$scope.data.password = "";
 			$scope.data.reTypePassword = "";
-			console.log("Save success");
 		}, function(response) {
 			// Manage Error
 			console.log("Save error");
