@@ -16,6 +16,9 @@ angular
     'angular-loading-bar',
     'ngSanitize'
   ])
+  
+  .value('urlPrefix', '/ricoh') //-------- '/ricoh' or ''
+  
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
 	  
 	 $ocLazyLoadProvider.config({
@@ -121,8 +124,8 @@ angular
                          ]
               });
             },
-            loadUsers:function($rootScope, $http, $state) {
-            	return $http.get('/restAct/user/findUserAll')
+            loadUsers:function($rootScope, $http, $state, urlPrefix) {
+            	return $http.get(urlPrefix + '/restAct/user/findUserAll')
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
 		            			$rootScope.error = true;

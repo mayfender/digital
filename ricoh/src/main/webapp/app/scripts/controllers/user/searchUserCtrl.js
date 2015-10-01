@@ -8,7 +8,7 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $
 	$scope.data.users = loadUsers.users;
 	
 	$scope.deleteUser = function(userId) {
-		$http.get('/restAct/user/deleteUser?userId=' + userId)
+		$http.get(urlPrefix + '/restAct/user/deleteUser?userId=' + userId)
 		.then(function(data) {
     		if(data.data.statusCode != 0) {
     			//-- Handle error
