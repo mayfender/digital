@@ -10,10 +10,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	$scope.login = function() {		
 		authenticate($scope.credentials, function() {
 	        if ($scope.authenticated) {
-	        	$state.go("dashboard.user.search");
-	        	$rootScope.error = false;
+	        	$state.go("dashboard.may");
+	        	$scope.error = false;
 	        } else {
-	        	$rootScope.error = true;
+	        	$scope.error = true;
 	        }
 	   });
 	}
@@ -34,10 +34,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		    
 		    callback && callback();
 	    }, function(response) {
-	    	if(response.data.error == 'Unauthorized') {
-	    		$rootScope.msg = 'Account does not exist';
+	    	if(response.data.status == 401) {
+	    		$scope.msg = 'Account does not exist';
 	    	} else {
-	    		$rootScope.msg = 'Failed to Connect';	    		
+	    		$scope.msg = 'Failed to Connect';	    		
 	    	}
 	    	
 	    	$scope.authenticated = false;

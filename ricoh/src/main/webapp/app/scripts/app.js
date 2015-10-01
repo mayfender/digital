@@ -128,15 +128,13 @@ angular
             	return $http.get(urlPrefix + '/restAct/user/findUserAll')
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
-		            			$rootScope.error = true;
-		            			$rootScope.msg = "Server Error!";
 		            			$state.go($state.current, {}, {reload: false});
 		            		}
             		
 		            		return data.data;
 		            	}, function(response) {
-		        	    	//-- Handle error
-		        	    	console.log("Have error");
+		            		if(response.data.status == 403) alert('Access denied !  you are not authorized to access this service');
+		            		
 		        	    	$state.go($state.current, {}, {reload: false});
 		        	    });
             }
