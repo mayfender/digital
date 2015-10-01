@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http, $state, urlPrefix) {
+angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $stateParams, $http, $state, $base64, urlPrefix) {
 	console.log('Start AddUserCtrl');
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
@@ -47,7 +47,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($scope, $statePa
 		
 		$http.post(urlPrefix + '/restAct/user/saveUser', {
 			userName: $scope.user.userName,
-			password: btoa($scope.user.password),
+			password: $base64.encode($scope.user.password),
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).then(function(data) {

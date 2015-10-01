@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $stateParams, $window, urlPrefix) {
+angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $stateParams, $window, $base64, urlPrefix) {
 	
 	var windowElement = angular.element($window);
 	windowElement.on('beforeunload', function (event) {
@@ -19,7 +19,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	}
 	
 	var authenticate = function(credentials, callback) {
-	    var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password), 'X-Requested-With' : 'XMLHttpRequest'} : {};
+	    var headers = credentials ? {authorization : "Basic " + $base64.encode(credentials.username + ":" + credentials.password), 'X-Requested-With' : 'XMLHttpRequest'} : {};
 
 	    $http.get(urlPrefix + '/user', {headers : headers}).
 	    then(function(data) {

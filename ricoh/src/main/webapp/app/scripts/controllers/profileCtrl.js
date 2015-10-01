@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $scope, $http) {
+angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $scope, $base64, $http) {
 	console.log('Start profile page');
 	
 	$scope.data = {};
@@ -19,7 +19,7 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 		$http.post('/restAct/user/updateProfile', {
 			oldUserName: $rootScope.principal.username,
 			newUserName: $scope.data.username,
-			password: $scope.data.password && btoa($scope.data.password)
+			password: $scope.data.password && $base64.encode($scope.data.password)
 		}).then(function(data) {
 			console.log(data);
 			if(data.data.statusCode != 0) {
