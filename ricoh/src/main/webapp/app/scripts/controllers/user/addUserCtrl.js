@@ -23,7 +23,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			userName: $scope.user.userName,
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
-		}, {headers: {'X-Requested-With' : 'XMLHttpRequest'}}).then(function(data) {
+		}).then(function(data) {
 			if(data.data.statusCode != 0) {
 				$rootScope.systemAlert(data.data.statusCode);
 				return;
@@ -48,7 +48,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			password: $base64.encode($scope.user.password),
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
-		}, {headers: {'X-Requested-With' : 'XMLHttpRequest'}}).then(function(data) {
+		}).then(function(data) {
 			if(data.data.statusCode != 0) {				
 				if(data.data.statusCode == 2000) {
 					$scope.existingUserErrMsg = "Username already exists";

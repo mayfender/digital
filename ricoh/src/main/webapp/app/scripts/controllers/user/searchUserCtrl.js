@@ -11,7 +11,7 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $
 		var deleteUser = confirm('Are you sure you want to delete this USER?');
 	    if(!deleteUser) return;
 		
-		$http.get(urlPrefix + '/restAct/user/deleteUser?userId=' + userId, {headers: {'X-Requested-With' : 'XMLHttpRequest'}})
+		$http.get(urlPrefix + '/restAct/user/deleteUser?userId=' + userId)
 		.then(function(data) {
     		if(data.data.statusCode != 0) {
     			$rootScope.systemAlert(data.data.statusCode);

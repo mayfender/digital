@@ -30,7 +30,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	}
 	
 	var authenticate = function(credentials, callback) {
-	    var headers = credentials ? {authorization : "Basic " + $base64.encode(credentials.username + ":" + credentials.password), 'X-Requested-With' : 'XMLHttpRequest'} : {};
+	    var headers = credentials ? {authorization : "Basic " + $base64.encode(credentials.username + ":" + credentials.password)} : {};
 
 	    $http.get(urlPrefix + '/user', {headers : headers}).
 	    then(function(data) {

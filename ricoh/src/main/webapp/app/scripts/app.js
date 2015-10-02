@@ -20,7 +20,9 @@ angular
   
   .value('urlPrefix', '/ricoh') //-------- '/ricoh' or ''
   
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
+  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider', function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
+	 
+	 $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 	  
 	 $ocLazyLoadProvider.config({
 	      debug:false,
@@ -126,7 +128,7 @@ angular
               });
             },
             loadUsers:function($rootScope, $http, $window, $state, urlPrefix) {
-            	return $http.get(urlPrefix + '/restAct/user/findUserAll', {headers: {'X-Requested-With' : 'XMLHttpRequest'}})
+            	return $http.get(urlPrefix + '/restAct/user/findUserAll')
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
 		            			$state.go($state.current, {}, {reload: false});
