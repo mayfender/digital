@@ -25,7 +25,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			status: $scope.user.enabled
 		}).then(function(data) {
 			if(data.data.statusCode != 0) {
-				// Manage Error
+				$rootScope.systemAlert(data.data.statusCode);
 				return;
 			}
 			
@@ -49,10 +49,12 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).then(function(data) {
-			if(data.data.statusCode != 0) {
-				console.log("have error");
-				
-				if(data.data.statusCode == 2000) $scope.existingUserErrMsg = "Username already exists";
+			if(data.data.statusCode != 0) {				
+				if(data.data.statusCode == 2000) {
+					$scope.existingUserErrMsg = "Username already exists";
+				}else{
+					$rootScope.systemAlert(data.data.statusCode);
+				}
 				
 				return;
 			}

@@ -8,7 +8,9 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	});
 	
 	$rootScope.systemAlert = function(code) {
-		if(code == 403) alert('Access denied !  you are not authorized to access this service');
+		if(code == undefined) alert('Server service unavailable! please contact admin');
+		else if(code == 403) alert('Access denied!  you are not authorized to access this service');
+		else if(code == 1000) alert('Server service error('+code+')');
 	}
 	
 	

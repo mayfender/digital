@@ -130,10 +130,12 @@ angular
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
 		            			$state.go($state.current, {}, {reload: false});
+		            			$rootScope.systemAlert(data.data.statusCode);
 		            		}
             		
 		            		return data.data;
 		            	}, function(response) {
+		            		console.log(response);
 		            		$rootScope.systemAlert(response.data.status);
 		            		
 		        	    	$state.go($state.current, {}, {reload: false});

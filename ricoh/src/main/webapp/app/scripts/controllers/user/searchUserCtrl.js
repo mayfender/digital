@@ -14,10 +14,10 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $
 		$http.get(urlPrefix + '/restAct/user/deleteUser?userId=' + userId)
 		.then(function(data) {
     		if(data.data.statusCode != 0) {
-    			//-- Handle error
-    			console.log("Have error");
+    			$rootScope.systemAlert(data.data.statusCode);
     			return;
     		}	    		
+    		
     		$scope.data.users = data.data.users;
 	    }, function(response) {
 	    	$rootScope.systemAlert(response.data.status);

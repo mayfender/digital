@@ -21,7 +21,11 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 			password: $scope.data.password && $base64.encode($scope.data.password)
 		}).then(function(data) {
 			if(data.data.statusCode != 0) {
-				if(data.data.statusCode == 2000) $scope.existingUserErrMsg = "Username already exists";
+				if(data.data.statusCode == 2000) {
+					$scope.existingUserErrMsg = "Username already exists";
+				}else{
+					$rootScope.systemAlert(data.data.statusCode);
+				}
 				return;
 			}
 			
@@ -30,8 +34,7 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 			$scope.data.reTypePassword = "";
 			$scope.existingUserErrMsg = null;
 		}, function(response) {
-			// Manage Error
-			console.log("Save error");
+			$rootScope.systemAlert(data.data.statusCode);
 		});
 	}
 	
