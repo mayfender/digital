@@ -125,8 +125,8 @@ angular
                          ]
               });
             },
-            loadUsers:function($rootScope, $http, $state, urlPrefix) {
-            	return $http.get(urlPrefix + '/restAct/user/findUserAll')
+            loadUsers:function($rootScope, $http, $window, $state, urlPrefix) {
+            	return $http.get(urlPrefix + '/restAct/user/findUserAll', {headers: {'X-Requested-With' : 'XMLHttpRequest'}})
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
 		            			$state.go($state.current, {}, {reload: false});
@@ -135,10 +135,8 @@ angular
             		
 		            		return data.data;
 		            	}, function(response) {
-		            		console.log(response);
 		            		$rootScope.systemAlert(response.data.status);
-		            		
-		        	    	$state.go($state.current, {}, {reload: false});
+		            		$state.go($state.current, {}, {reload: false});
 		        	    });
             }
     	}

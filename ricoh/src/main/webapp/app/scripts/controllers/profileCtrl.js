@@ -15,7 +15,7 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 		}
 		
 		console.log("Continue to call backend");
-		$http.post(urlPrefix + '/restAct/user/updateProfile', {
+		$http.post(urlPrefix + '/restAct/user/updateProfile', {headers: {'X-Requested-With' : 'XMLHttpRequest'}}, {
 			oldUserName: $rootScope.principal.username,
 			newUserName: $scope.data.username,
 			password: $scope.data.password && $base64.encode($scope.data.password)

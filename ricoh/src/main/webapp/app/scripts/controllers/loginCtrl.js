@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $stateParams, $window, $base64, urlPrefix) {
+angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $window, $stateParams, $window, $base64, urlPrefix) {
 	
 	var windowElement = angular.element($window);
 	windowElement.on('beforeunload', function (event) {
@@ -10,6 +10,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	$rootScope.systemAlert = function(code) {
 		if(code == undefined) alert('Server service unavailable! please contact admin');
 		else if(code == 403) alert('Access denied!  you are not authorized to access this service');
+		else if(code == 401) {
+			alert('Seesion expired! please login again');
+			$window.location.href = urlPrefix;
+		}
 		else if(code == 1000) alert('Server service error('+code+')');
 	}
 	
