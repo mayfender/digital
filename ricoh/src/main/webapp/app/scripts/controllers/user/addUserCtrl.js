@@ -31,7 +31,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			
 			$state.go('dashboard.user.search');
 		}, function(response) {
-			$rootScope.systemAlert(response.data.status);
+			$rootScope.systemAlert(response.status);
 		});
 	}
 	
@@ -61,7 +61,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			
 			$state.go('dashboard.user.search');
 		}, function(response) {
-			$rootScope.systemAlert(response.data.status);
+			$rootScope.systemAlert(response.status);
 		});
 	}
 	

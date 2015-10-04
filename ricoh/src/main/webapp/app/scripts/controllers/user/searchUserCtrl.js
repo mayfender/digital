@@ -20,7 +20,7 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $
     		
     		$scope.data.users = data.data.users;
 	    }, function(response) {
-	    	$rootScope.systemAlert(response.data.status);
+	    	$rootScope.systemAlert(response.status);
 	    });
 	}
 	

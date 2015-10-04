@@ -137,8 +137,8 @@ angular
             		
 		            		return data.data;
 		            	}, function(response) {
-		            		$rootScope.systemAlert(response.data.status);
-		            		$state.go($state.current, {}, {reload: false});
+		            		$rootScope.systemAlert(response.status);
+		            		//$state.go($state.current, {}, {reload: false});
 		        	    });
             }
     	}

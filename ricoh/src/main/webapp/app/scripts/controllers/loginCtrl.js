@@ -8,13 +8,14 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	});
 	
 	$rootScope.systemAlert = function(code) {
-		if(code == undefined) alert('Server service unavailable! please contact admin');
-		else if(code == 403) alert('Access denied!  you are not authorized to access this service');
-		else if(code == 401) {
+		if(code == undefined) alert('Unknown error! please contact admin');
+		else if(code == 403) {
+			alert('Access denied!  you are not authorized to access this service');
+			$window.location.href = urlPrefix + '/logout';
+		}else if(code == 401) {
 			alert('Seesion expired! please login again');
-			$window.location.href = urlPrefix;
-		}
-		else if(code == 1000) alert('Server service error('+code+')');
+			$window.location.href = urlPrefix + '/logout';
+		}else if(code == 1000) alert('Server service error('+code+')');
 	}
 	
 	
@@ -45,7 +46,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		    
 		    callback && callback();
 	    }, function(response) {
-	    	if(response.data.status == 401) {
+	    	if(response.status == 401) {
 	    		$scope.msg = 'Account does not exist';
 	    	} else {
 	    		$scope.msg = 'Failed to Connect';	    		
