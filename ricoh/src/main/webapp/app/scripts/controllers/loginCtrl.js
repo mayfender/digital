@@ -9,7 +9,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	
 	$rootScope.systemAlert = function(code) {
 		if(code == undefined) alert('Unknown error! please contact admin');
-		else if(code == 403) {
+		else if(code == 0) {
+			alert('Service Unavailable!  please contact admin');
+			$window.location.href = urlPrefix + '/logout';
+		}else if(code == 403) {
 			alert('Access denied!  you are not authorized to access this service');
 			$window.location.href = urlPrefix + '/logout';
 		}else if(code == 401) {
