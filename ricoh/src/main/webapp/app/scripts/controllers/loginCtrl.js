@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $window, $stateParams, $window, $base64, urlPrefix) {
+angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope, $state, $http, $window, $stateParams, $window, $base64, toaster, urlPrefix) {
 	
 	var windowElement = angular.element($window);
 	windowElement.on('beforeunload', function (event) {
@@ -71,6 +71,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	
 	if($stateParams.action == 'logout') {
 		logout();
+	}
+	
+	$scope.may = function() {
+		toaster.pop('error', "title", "text");
 	}
 	
 });

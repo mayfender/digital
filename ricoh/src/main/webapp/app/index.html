@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="lib/css/metisMenu.min.css" type="text/css">
     <link rel="stylesheet" href="lib/css/loading-bar.min.css" type="text/css">
     <link rel="stylesheet" href="lib/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="lib/css/toaster.min.css" type="text/css">
     <!-- endbuild -->
     
     <!-- build:js(.) scripts/vendor.js -->
@@ -37,6 +38,7 @@
     <script src="lib/Chart.min.js"></script>
     <script src="lib/angular-sanitize.min.js"></script>
     <script src="lib/angular-base64.min.js"></script>
+    <script src="lib/toaster.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
@@ -56,6 +58,8 @@
     <body>
 
 	    <div ng-app="sbAdminApp">
+	    	<toaster-container toaster-options="{'showDuration': 3000}">
+	    	</toaster-container>
 	
 	        <div ui-view></div>
 	

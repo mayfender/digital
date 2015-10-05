@@ -15,7 +15,8 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'ngSanitize',
-    'base64'
+    'base64',
+    'toaster'
   ])
   
   .value('urlPrefix', '/ricoh') //-------- '/ricoh' or ''
