@@ -23,6 +23,7 @@ angular
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider', function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
 	 
 	 $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+	 $httpProvider.interceptors.push('httpInterceptor');
 	  
 	 $ocLazyLoadProvider.config({
 	      debug:false,
