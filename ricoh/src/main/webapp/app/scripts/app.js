@@ -128,18 +128,18 @@ angular
                          ]
               });
             },
-            loadUsers:function($rootScope, $http, $window, $state, urlPrefix) {
+            loadUsers:function($rootScope, $http, $window, $state, $q, urlPrefix) {
             	return $http.get(urlPrefix + '/restAct/user/findUserAll')
             		  .then(function(data){
 		            		if(data.data.statusCode != 0) {
-		            			$state.go($state.current, {}, {reload: false});
 		            			$rootScope.systemAlert(data.data.statusCode);
+		            			//$state.go($state.current, {}, {reload: false});
+		            			return $q.reject(data);
 		            		}
             		
 		            		return data.data;
 		            	}, function(response) {
 		            		$rootScope.systemAlert(response.status);
-		            		//$state.go($state.current, {}, {reload: false});
 		        	    });
             }
     	}
