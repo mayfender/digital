@@ -13,11 +13,12 @@ angular.module('sbAdminApp').controller('SearchUserCtrl', function($rootScope, $
 		
 		$http.get(urlPrefix + '/restAct/user/deleteUser?userId=' + userId)
 		.then(function(data) {
-    		if(data.data.statusCode != 0) {
+    		if(data.data.statusCode != 9999) {
     			$rootScope.systemAlert(data.data.statusCode);
     			return;
     		}	    		
     		
+    		$rootScope.systemAlert(data.data.statusCode, 'Delete User Success');
     		$scope.data.users = data.data.users;
 	    }, function(response) {
 	    	$rootScope.systemAlert(response.status);

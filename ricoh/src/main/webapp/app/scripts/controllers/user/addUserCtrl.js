@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $scope, $stateParams, $http, $state, $base64, urlPrefix) {
+angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $scope, $stateParams, $http, $state, $base64, urlPrefix, toaster) {
 	
 	$scope.$parent.iconBtn = 'fa-long-arrow-left';
 	$scope.$parent.url = 'search';
@@ -24,11 +24,12 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).then(function(data) {
-			if(data.data.statusCode != 0) {
+			if(data.data.statusCode != 9999) {
 				$rootScope.systemAlert(data.data.statusCode);
 				return;
 			}
 			
+			$rootScope.systemAlert(data.data.statusCode, 'Update User Success');
 			$state.go('dashboard.user.search');
 		}, function(response) {
 			$rootScope.systemAlert(response.status);
@@ -49,7 +50,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).then(function(data) {
-			if(data.data.statusCode != 0) {				
+			if(data.data.statusCode != 9999) {				
 				if(data.data.statusCode == 2000) {
 					$scope.existingUserErrMsg = "Username already exists";
 				}else{
@@ -59,6 +60,7 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 				return;
 			}
 			
+			$rootScope.systemAlert(data.data.statusCode, 'Save User Success');
 			$state.go('dashboard.user.search');
 		}, function(response) {
 			$rootScope.systemAlert(response.status);

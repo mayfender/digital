@@ -20,7 +20,7 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 			newUserName: $scope.data.username,
 			password: $scope.data.password && $base64.encode($scope.data.password)
 		}).then(function(data) {
-			if(data.data.statusCode != 0) {
+			if(data.data.statusCode != 9999) {
 				if(data.data.statusCode == 2000) {
 					$scope.existingUserErrMsg = "Username already exists";
 				}else{
@@ -29,6 +29,7 @@ angular.module('sbAdminApp').controller('ProfileCtrl', function($rootScope, $sco
 				return;
 			}
 			
+			$rootScope.systemAlert(data.data.statusCode, 'Update Profile Success');
 			$rootScope.principal.username = $scope.data.username;
 			$scope.data.password = "";
 			$scope.data.reTypePassword = "";

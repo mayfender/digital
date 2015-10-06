@@ -1,7 +1,7 @@
 package com.may.ple.dg.ricoh.criteria;
 
 public abstract class CommonCriteriaResp {
-	private int statusCode;
+	private int statusCode = 9999;
 	
 	public CommonCriteriaResp(){}
 	

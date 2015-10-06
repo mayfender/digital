@@ -7,7 +7,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		event.preventDefault();
 	});
 	
-	$rootScope.systemAlert = function(code) {
+	$rootScope.systemAlert = function(code, title, bodyMsg) {
 		if(code == undefined) alert('Unknown error! please contact admin');
 		else if(code == 0) {
 			alert('Service Unavailable!  please contact admin');
@@ -22,8 +22,14 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 			toaster.clear();
 			toaster.pop({
                 type: 'error',
-                title: 'Get User-data error !',
-                body: 'Server service error('+code+')'
+                title: 'Server service error('+code+')',
+                body: bodyMsg
+            });
+		}else if(code == 9999) {
+			toaster.pop({
+                type: 'success',
+                title: title,
+                body: bodyMsg
             });
 		}
 	}
