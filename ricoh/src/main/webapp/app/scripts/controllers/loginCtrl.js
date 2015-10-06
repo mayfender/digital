@@ -18,17 +18,17 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		}else if(code == 401) {
 			alert('Seesion expired! please login again');
 			$window.location.href = urlPrefix + '/logout';
-		}else if(code == 1000) {
-			toaster.clear();
-			toaster.pop({
-                type: 'error',
-                title: 'Server service error('+code+')',
-                body: bodyMsg
-            });
 		}else if(code == 9999) {
 			toaster.pop({
                 type: 'success',
                 title: title,
+                body: bodyMsg
+            });
+		}else{
+			toaster.clear();
+			toaster.pop({
+                type: 'error',
+                title: 'Server service error('+code+')',
                 body: bodyMsg
             });
 		}
@@ -43,8 +43,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	        	toaster.clear();
 	        	toaster.pop({
 	                type: 'error',
-	                title: 'Login error !',
-	                body: $scope.msg
+	                title: $scope.msg
 	            });
 	        }
 	   });
