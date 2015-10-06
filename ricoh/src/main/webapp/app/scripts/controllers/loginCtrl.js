@@ -18,7 +18,13 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		}else if(code == 401) {
 			alert('Seesion expired! please login again');
 			$window.location.href = urlPrefix + '/logout';
-		}else if(code == 1000) alert('Server service error('+code+')');
+		}else if(code == 1000) {
+			toaster.pop({
+                type: 'error',
+                title: 'Get User-data error !',
+                body: 'Server service error('+code+')'
+            });
+		}
 	}
 	
 	
@@ -26,9 +32,12 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		authenticate($scope.credentials, function() {
 	        if ($scope.authenticated) {
 	        	$state.go("dashboard.may");
-	        	$scope.error = false;
 	        } else {
-	        	$scope.error = true;
+	        	toaster.pop({
+	                type: 'error',
+	                title: 'Login error !',
+	                body: $scope.msg
+	            });
 	        }
 	   });
 	}
@@ -41,10 +50,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 		    if (data.data.name) {
 		    	$rootScope.principal = data.data.principal;
 		        $scope.authenticated = true;
-		        $rootScope.msg = null;
+		        $scope.msg = null;
 		    } else {
 		    	$scope.authenticated = false;
-		    	$rootScope.msg = 'Account does not exist';
+		    	$scope.msg = 'Account does not exist';
 		    }
 		    
 		    callback && callback();
@@ -71,10 +80,6 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	
 	if($stateParams.action == 'logout') {
 		logout();
-	}
-	
-	$scope.may = function() {
-		toaster.pop('error', "title", "text");
 	}
 	
 });
