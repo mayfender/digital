@@ -4,7 +4,8 @@ angular.module('sbAdminApp').factory("httpInterceptor", function ($q, $window, $
            var responseHeaders;
            responseHeaders = response.headers();
            
-           if (responseHeaders["content-type"].indexOf("text/html") !== -1
+           if (responseHeaders["content-type"] 
+           		  && responseHeaders["content-type"].indexOf("text/html") !== -1
                   && response.data 
                   && response.data.indexOf('<meta name="unauthorized" content="true">') !== -1) {
         	 
