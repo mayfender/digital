@@ -107,19 +107,14 @@ angular
         templateUrl:'views/dictionary.html',
         url:'/dictionary',
         controller: function($scope, $http) {
-        	
-        	
         	$scope.translate = function() {
-        		
-        		 $http.jsonp('https://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=good&callback=JSON_CALLBACK&pretty=true')
-        	        .success(function(data){
-        	            console.log(data);
-        	        });
-        	
-        		
+        		 $http.jsonp('https://glosbe.com/gapi/translate?tm=false&from=eng&dest=th&format=json&phrase='+ $scope.source.trim() +'&callback=JSON_CALLBACK&pretty=true')
+        	        .then(function(data){
+        	        	$scope.phrases = data.data.tuc;
+        	        }, function(response) {
+        	        	$rootScope.systemAlert(response.status);
+        	        });	
         	}
-        	
-        	
         }
     })
     //------------------------------------: User :-------------------------------------------

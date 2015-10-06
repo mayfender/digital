@@ -14,16 +14,19 @@
                 <div class="panel-body">
                 	
                 	<div class="col-lg-4">
-	                	<form name="translateForm" ng-submit="translate()">
+	                	<form name="translateForm">
 							<div class="form-group">
-								<textarea class="form-control" rows="3" cols="10" ng-model="source"></textarea>
+								<textarea class="form-control" rows="3" cols="10" ng-model="source" ng-keyup="translate()"></textarea>
 							</div>
-							<button type="submit">click to test</button>
 						</form>
 					</div>
 					
 					<div class="col-lg-8">
-						{{ result }}
+					
+						<div class="row" ng-repeat="p in phrases | filter:{ meaningId: '!!' } track by $index" style="border: 1px solid red;">
+							{{ p }}	
+						</div>
+					
 					</div>
                 </div>
                 <div class="panel-footer"></div>
