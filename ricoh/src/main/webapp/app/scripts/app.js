@@ -103,9 +103,24 @@ angular
           }
         }
       })
-    .state('dashboard.may',{
-        templateUrl:'views/may.html',
-        url:'/may'
+    .state('dashboard.dictionary',{
+        templateUrl:'views/dictionary.html',
+        url:'/dictionary',
+        controller: function($scope, $http) {
+        	
+        	
+        	$scope.translate = function() {
+        		
+        		 $http.jsonp('https://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=good&callback=JSON_CALLBACK&pretty=true')
+        	        .success(function(data){
+        	            console.log(data);
+        	        });
+        	
+        		
+        	}
+        	
+        	
+        }
     })
     //------------------------------------: User :-------------------------------------------
     .state('dashboard.user',{
