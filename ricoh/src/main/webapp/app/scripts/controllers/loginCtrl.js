@@ -19,6 +19,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 			alert('Seesion expired! please login again');
 			$window.location.href = urlPrefix + '/logout';
 		}else if(code == 1000) {
+			toaster.clear();
 			toaster.pop({
                 type: 'error',
                 title: 'Get User-data error !',
@@ -33,6 +34,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', function($rootScope, $scope
 	        if ($scope.authenticated) {
 	        	$state.go("dashboard.may");
 	        } else {
+	        	toaster.clear();
 	        	toaster.pop({
 	                type: 'error',
 	                title: 'Login error !',
