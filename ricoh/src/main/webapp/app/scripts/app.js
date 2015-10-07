@@ -108,7 +108,7 @@ angular
         url:'/dictionary',
         controller: function($scope, $http) {
         	$scope.translate = function() {
-        		 $http.jsonp('https://glosbe.com/gapi/translate?tm=false&from=eng&dest=th&format=json&phrase='+ $scope.source.trim() +'&callback=JSON_CALLBACK&pretty=true')
+        		 $http.jsonp('https://glosbe.com/gapi/translate?tm=false&from=eng&dest=th&format=json&phrase='+ $scope.source.trim().toLowerCase() +'&callback=JSON_CALLBACK&pretty=true')
         	        .then(function(data){
         	        	$scope.phrases = data.data.tuc;
         	        }, function(response) {
