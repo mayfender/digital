@@ -16,17 +16,18 @@
                 	<div class="col-lg-4">
 	                	<form name="translateForm">
 							<div class="form-group">
-								<textarea class="form-control" rows="3" cols="10" ng-model="source" ng-keyup="translate()"></textarea>
+								<textarea class="form-control" rows="3" cols="10" ng-model="source" ng-blur="translate()"></textarea>
 							</div>
 						</form>
 					</div>
 					
 					<div class="col-lg-8">
-					
-						<div class="row" ng-repeat="p in phrases | filter:{ meaningId: '!!' } track by $index" style="border: 1px solid red;">
-							{{ p }}	
+						<div class="well">
+							<h4>คำแปล</h4>
+							<p ng-repeat="p in phrases | filter:{ meaningId: '!!' } track by $index">
+								{{ p.phrase.text }}
+							</p>
 						</div>
-					
 					</div>
                 </div>
                 <div class="panel-footer"></div>
