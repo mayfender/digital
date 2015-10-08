@@ -1,8 +1,41 @@
 <html>
 <head>
 <title>Root</title>
+<script type="text/javascript">
+var wsUri = "ws://localhost:8080/ricoh/myHandler";
+var websocket;
+
+function testWebSocket() { 
+	websocket = new WebSocket(wsUri); 
+	websocket.onopen = function(evt) { 
+		console.log(evt);
+		//onOpen(evt) 
+	}; 
+	websocket.onclose = function(evt) { 
+		console.log(evt);
+		//onClose(evt) 
+	}; 
+	websocket.onmessage = function(evt) {
+		console.log(evt); 
+		//onMessage(evt) 
+	}; 
+	websocket.onerror = function(evt) {
+		console.log(evt); 
+		//onError(evt) 
+	}; 
+}
+
+function sendMsg() {
+	websocket.send('Hello');
+}
+
+</script>
 </head>
 <body>
 	Root Page
+	
+	
+	<button onclick="testWebSocket()">Connect to websocket</button><br />
+	<button onclick="sendMsg()">Send message</button>
 </body>
 </html>
