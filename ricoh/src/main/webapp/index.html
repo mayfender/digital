@@ -1,8 +1,21 @@
 <html>
 <head>
 <title>Root</title>
+<script src="app/js/stomp.js"></script>
 <script type="text/javascript">
-var wsUri = "ws://localhost:8080/ricoh/myHandler";
+
+
+function testWebSocket() { 
+	var socket = new WebSocket("/ricoh/myHandler");
+	var stompClient = Stomp.over(socket);
+	
+	stompClient.connect({}, function(frame) {
+		console.log(frame);
+	}
+}
+
+
+/* var wsUri = "ws://localhost:8081/ricoh/myHandler";
 var websocket;
 
 function testWebSocket() { 
@@ -27,7 +40,7 @@ function testWebSocket() {
 
 function sendMsg() {
 	websocket.send('Hello');
-}
+} */
 
 </script>
 </head>
