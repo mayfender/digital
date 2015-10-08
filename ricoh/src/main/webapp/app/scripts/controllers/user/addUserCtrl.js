@@ -24,8 +24,13 @@ angular.module('sbAdminApp').controller('AddUserCtrl', function($rootScope, $sco
 			authority: $scope.user.roles[0].authority,
 			status: $scope.user.enabled
 		}).then(function(data) {
-			if(data.data.statusCode != 9999) {
-				$rootScope.systemAlert(data.data.statusCode);
+			if(data.data.statusCode != 9999) {				
+				if(data.data.statusCode == 2000) {
+					$scope.existingUserErrMsg = "Username already exists";
+				}else{
+					$rootScope.systemAlert(data.data.statusCode);
+				}
+				
 				return;
 			}
 			
