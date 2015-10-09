@@ -3,30 +3,36 @@
 <title>Root</title>
 <script src="app/js/stomp.js"></script>
 <script type="text/javascript">
-
+var stompClient;
 function testWebSocket() { 
-	var socket = new WebSocket("ws://localhost:8080/ricoh/myHandler");
-	var stompClient = Stomp.over(socket);
+	var socket = new WebSocket("ws://localhost:8081/ricoh/myHandler");
+	stompClient = Stomp.over(socket);
 	
 	stompClient.connect({}, function(frame) {
 		console.log(frame);
-		
-		
-		//stompClient.send('/app/greeting', {}, 'Hello May');
-		
-		stompClient.subscribe('/app', function(message) {
-			console.log(message);
-		});
 	});
 }
+
+function subscribe() {
+	stompClient.subscribe('/topic/may', function(message) {
+		console.log(message);
+	});
+}
+
+function sendMsg() {
+	stompClient.send('/app/may', {}, 'Hello May');
+}
+
 
 </script>
 </head>
 <body>
 	Root Page
 	
-	
+	<br />
 	<button onclick="testWebSocket()">Connect to websocket</button><br />
-	<button onclick="sendMsg()">Send message</button>
+	<button onclick="subscribe()">Subscribe</button><br />
+	<button onclick="sendMsg()">Send message</button> <br />
+	
 </body>
 </html>
