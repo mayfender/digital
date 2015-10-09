@@ -4,43 +4,21 @@
 <script src="app/js/stomp.js"></script>
 <script type="text/javascript">
 
-
 function testWebSocket() { 
-	var socket = new WebSocket("/ricoh/myHandler");
+	var socket = new WebSocket("ws://localhost:8080/ricoh/myHandler");
 	var stompClient = Stomp.over(socket);
 	
 	stompClient.connect({}, function(frame) {
 		console.log(frame);
-	}
+		
+		
+		//stompClient.send('/app/greeting', {}, 'Hello May');
+		
+		stompClient.subscribe('/app', function(message) {
+			console.log(message);
+		});
+	});
 }
-
-
-/* var wsUri = "ws://localhost:8081/ricoh/myHandler";
-var websocket;
-
-function testWebSocket() { 
-	websocket = new WebSocket(wsUri); 
-	websocket.onopen = function(evt) { 
-		console.log(evt);
-		//onOpen(evt) 
-	}; 
-	websocket.onclose = function(evt) { 
-		console.log(evt);
-		//onClose(evt) 
-	}; 
-	websocket.onmessage = function(evt) {
-		console.log(evt); 
-		//onMessage(evt) 
-	}; 
-	websocket.onerror = function(evt) {
-		console.log(evt); 
-		//onError(evt) 
-	}; 
-}
-
-function sendMsg() {
-	websocket.send('Hello');
-} */
 
 </script>
 </head>
