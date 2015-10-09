@@ -5,7 +5,7 @@
 <script type="text/javascript">
 var stompClient;
 function testWebSocket() { 
-	var socket = new WebSocket("ws://localhost:8081/ricoh/myHandler");
+	var socket = new WebSocket("ws://localhost:8081/ricoh/websocketHandler");
 	stompClient = Stomp.over(socket);
 	
 	stompClient.connect({}, function(frame) {
