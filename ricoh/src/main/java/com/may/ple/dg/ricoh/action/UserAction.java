@@ -109,7 +109,7 @@ public class UserAction {
 			LOG.debug(req);
 			service.updateUser(req);
 			
-			template.convertAndSend("/topic/may", "Update Success");
+			template.convertAndSend("/topic/may", "{}");
 			
 		} catch (CustomerException cx) {
 			resp.setStatusCode(cx.errCode);

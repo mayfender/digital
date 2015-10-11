@@ -1,11 +1,11 @@
 <html>
 <head>
 <title>Root</title>
-<script src="app/js/stomp.js"></script>
+<script src="app/lib/stomp.js"></script>
 <script type="text/javascript">
 var stompClient;
 function testWebSocket() { 
-	var socket = new WebSocket("ws://localhost:8081/ricoh/websocketHandler");
+	var socket = new WebSocket("ws://localhost:8080/ricoh/websocketHandler");
 	stompClient = Stomp.over(socket);
 	
 	stompClient.connect({}, function(frame) {
