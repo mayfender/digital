@@ -195,7 +195,7 @@ angular
         url:'/blank'
     })
       .state('login',{
-        templateUrl:'views/pages/login.html',
+        templateUrl:'views/login.html',
         params: {'action': null},
         url:'/login',
         controller: 'LoginCtrl'
