@@ -17,12 +17,14 @@ angular
     'ngSanitize',
     'base64',
     'toaster',
+    'pascalprecht.translate',
     'ngStomp'
   ])
   
   .value('urlPrefix', '/ricoh') //-------- '/ricoh' or ''
   
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider', function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
+  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider', '$translateProvider',
+           function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider, $translateProvider) {
 	 
 	 $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 	 $httpProvider.interceptors.push('httpInterceptor');
@@ -31,6 +33,14 @@ angular
 	      debug:false,
 	      events:true,
 	 });
+	 
+	//-------: i18n
+	$translateProvider.useStaticFilesLoader({
+        prefix: 'i18n/locale-',
+        suffix: '.json'
+    });
+	$translateProvider.preferredLanguage('th');
+	$translateProvider.useSanitizeValueStrategy(null);
 
     $urlRouterProvider.otherwise('/dashboard/may');
 
