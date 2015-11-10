@@ -42,7 +42,7 @@ angular
 	$translateProvider.preferredLanguage('th');
 	$translateProvider.useSanitizeValueStrategy(null);
 
-    $urlRouterProvider.otherwise('/dashboard/may');
+    $urlRouterProvider.otherwise('/dashboard/customer');
 
     $stateProvider
       .state('dashboard', {
@@ -194,6 +194,14 @@ angular
               });
             }
     	}
+    })
+    //------------------------------------: Customer :-------------------------------------------    
+    .state('dashboard.customer',{
+    	templateUrl:'views/customer/main.html',
+    	url:'/customer',
+    	controller: function($scope, $http) {
+    		$scope.test = 'testing';
+        }
     })
     //------------------------------------: Form :-------------------------------------------
       .state('dashboard.form',{
